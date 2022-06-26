@@ -33,9 +33,9 @@ void Menu::mantener_abierto_menu(Utilidades validador, Utilidades limpiador, Pro
 
 ProcesadorDeOpciones* Menu::cargar_archivos(LectorEscritores lector_escritores, LectorLecturas lector_lecturas) {
 
-     Lista<Escritor*>* lista_escritores = lector_escritores.procesar_escritores();
-     Lista<Lectura*>* lista_lecturas = lector_lecturas.procesar_lecturas(lista_escritores);
-     ProcesadorDeOpciones* procesador_opciones = new ProcesadorDeOpciones(lista_escritores, lista_lecturas);
+     Hash* tabla_escritores = lector_escritores.procesar_escritores();
+     Lista<Lectura*>* lista_lecturas = lector_lecturas.procesar_lecturas(tabla_escritores);
+     ProcesadorDeOpciones* procesador_opciones = new ProcesadorDeOpciones(tabla_escritores, lista_lecturas);
 
      return procesador_opciones;
 }

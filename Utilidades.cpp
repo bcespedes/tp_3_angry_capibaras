@@ -52,14 +52,13 @@ void Utilidades::insertar_lectura_ordenada(Lectura* lectura, Lista<Lectura*>* li
                 avanzar = false;
                 pos--;
             }
+            lista_lectura -> siguiente();
             if(!lista_lectura -> hay_siguiente()) {
                 pos++;
                 avanzar = false;
             }
-            else {
+            else
                 pos++;
-                lista_lectura -> siguiente();
-            }
         }
     }
 

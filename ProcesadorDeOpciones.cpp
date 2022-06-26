@@ -1,9 +1,9 @@
 # include "ProcesadorDeOpciones.h"
 
 
-ProcesadorDeOpciones::ProcesadorDeOpciones(Lista<Escritor*>* lista_escritores, Lista<Lectura*>* lista_lecturas) {
+ProcesadorDeOpciones::ProcesadorDeOpciones(Hash* tabla_escritores, Lista<Lectura*>* lista_lecturas) {
 
-    lista_escritores_ = lista_escritores;
+    tabla_escritores_ = tabla_escritores;
     lista_lecturas_ = lista_lecturas;
 }
 
@@ -49,33 +49,33 @@ char ProcesadorDeOpciones::ingresar_si_o_no(string instruccion) {
 }
 
 
-Escritor* ProcesadorDeOpciones::no_es_escritor_anonimo(int indice, int cantidad_escritores) {
+Escritor* ProcesadorDeOpciones::no_es_escritor_anonimo(int isni) {
 
     Utilidades validador, limpiador;
     Escritor* escritor;
     cout << endl;
 
-    for(int i = 0; i < lista_escritores_ -> obtener_cantidad(); i++)
-        cout << "[" << i + 1 << "] - " << lista_escritores_ -> consulta(i) -> obtener_nombre_completo() << endl << endl;
+    tabla_escritores_ -> imprimir_escritores(true);
 
-    while (!validador.validar_opcion(indice, cantidad_escritores) && indice != OPCION_ALTERNATIVA) {
-
-        indice = validador.validar_ingreso_entero(indice, "Ingrese el indice del escritor de la lectura correspondiente."
+    while(!tabla_escritores_ -> esta_el_elemento(isni) && isni != OPCION_ALTERNATIVA) {
+        isni = validador.validar_ingreso_entero(isni, "Ingrese el ISNI del escritor de la lectura correspondiente."
         " Si su escritor no aparece en la lista ingrese -1: ", OPCION_ALTERNATIVA);
-
-        if(!validador.validar_opcion(indice, cantidad_escritores) && indice != OPCION_ALTERNATIVA)
-            cout << ERROR_INGRESO_INCORRECTO + VOLVER_A_INTENTAR;
+        if(isni > ISNI_MAXIMO)
+            cout << ERROR_TIPO_DE_DATO << VOLVER_A_INTENTAR;
+        else if(isni < ISNI_MINIMO && isni != OPCION_ALTERNATIVA)
+            cout << ERROR_TIPO_DE_DATO << VOLVER_A_INTENTAR;
+        else if(!tabla_escritores_ -> esta_el_elemento(isni) && isni != OPCION_ALTERNATIVA)
+            cout << ERROR_ISNI_INVALIDO + VOLVER_A_INTENTAR;
     }
 
-    if(indice == OPCION_ALTERNATIVA) {
+    if(isni == OPCION_ALTERNATIVA) {
         limpiador.limpiar_pantalla();
-        cout << "\nProceda a agregar un nuevo escritor:\n" << endl;
-        agregar_escritor();
-        indice = cantidad_escritores + 1;
+        cout << "Proceda a agregar un nuevo escritor:\n" << endl;
+        isni = agregar_escritor();
         cout << "\nAhora prosiga creando su lectura." << endl;
     }
 
-    escritor = lista_escritores_ -> consulta(indice - 1);
+    escritor = tabla_escritores_-> consulta(isni);
 
     return escritor;
 }
@@ -178,7 +178,7 @@ void ProcesadorDeOpciones::agregar_lectura() {
     string titulo;
     unsigned int duracion = 0, anio = 0;
     char anonimo = 'X';
-    int indice = 0, cantidad_escritores = lista_escritores_ -> obtener_cantidad();
+    int isni = 0;
     Escritor* escritor = NULL;
     Lectura* lectura;
 
@@ -193,13 +193,13 @@ void ProcesadorDeOpciones::agregar_lectura() {
     cout << endl;
     anio = validador.validar_ingreso_entero(anio, "Ingrese el anio de publicacion: ", OPCION_MINIMA);
 
-    if(!lista_escritores_ -> vacia())
+    if(!tabla_escritores_ -> vacia())
         anonimo = ingresar_si_o_no("Su escritor es anonimo?");
     else
         cout << "\nNo hay escritores cargados, por lo tanto su lectura se creara con escritor anonimo." << endl;
 
     if(toupper(anonimo) == NOVELA)
-        escritor = no_es_escritor_anonimo(indice, cantidad_escritores);
+        escritor = no_es_escritor_anonimo(isni);
 
     lectura = crear_lectura(tipo_lectura, titulo, duracion, anio, escritor);
     insertador.insertar_lectura_ordenada(lectura, lista_lecturas_);
@@ -238,11 +238,21 @@ void ProcesadorDeOpciones::quitar_lectura() {
 }
 
 
-void ProcesadorDeOpciones::agregar_escritor() {
+int ProcesadorDeOpciones::agregar_escritor() {
 
     Utilidades validador;
     string nombre, apellido, nacionalidad;
-    int anio_nacimiento = 0, anio_fallecimiento = 0;
+    int isni = 0, anio_nacimiento = 0, anio_fallecimiento = 0;
+
+    while(tabla_escritores_ -> esta_el_elemento(isni) || (isni < ISNI_MINIMO || isni > ISNI_MAXIMO)) {
+        isni = validador.validar_ingreso_entero(isni, "Ingrese el ISNI correspondiente al autor: ", ISNI_MINIMO);
+        if(isni > ISNI_MAXIMO)
+            cout << ERROR_TIPO_DE_DATO << VOLVER_A_INTENTAR;
+        else if(tabla_escritores_ -> esta_el_elemento(isni))
+            cout << ERROR_ISNI_USADO + VOLVER_A_INTENTAR;
+
+    }
+    cout << endl;
 
     cout << "Ingrese el nombre del escritor a agregar: ";
     getline(cin, nombre);
@@ -259,31 +269,39 @@ void ProcesadorDeOpciones::agregar_escritor() {
     cout << endl;
     anio_fallecimiento = validador.validar_ingreso_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor a agregar (-1 en caso de no poseerlo): ", OPCION_ALTERNATIVA);
 
-    Escritor* escritor = new Escritor(nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
-    lista_escritores_ -> alta(escritor, lista_escritores_ -> obtener_cantidad());
+    Escritor* escritor = new Escritor(isni, nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento);
+    tabla_escritores_-> alta(escritor);
 
     cout << "\n\nSe agrego a " << nombre << " " << apellido << " a la lista correctamente.\n" << endl;
+
+    return isni;
 }
 
 
 void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
 
-    if(!lista_escritores_ -> vacia()) {
+    if(!tabla_escritores_-> vacia()) {
         Utilidades validador;
-        int anio_fallecimiento = 0;
+        int isni = 0, anio_fallecimiento = 0;
 
-        lista_escritores_ -> imprimir_lista_escritores();
+        tabla_escritores_ -> imprimir_escritores(false);
 
-        int indice = ingresar_indice_lista("Ingrese el indice del escritor a asignarle el anio: ", lista_escritores_ -> obtener_cantidad());
+        while(!tabla_escritores_ -> esta_el_elemento(isni)) {
+            isni = validador.validar_ingreso_entero(isni, "Ingrese el ISNI del escritor a asignarle el anio: ", ISNI_MINIMO);
+            if(isni > ISNI_MAXIMO)
+                cout << ERROR_TIPO_DE_DATO << VOLVER_A_INTENTAR;
+            else if(!tabla_escritores_ -> esta_el_elemento(isni))
+                cout << ERROR_ISNI_INVALIDO + VOLVER_A_INTENTAR;
+        }
 
-        if(lista_escritores_ -> consulta(indice - 1) -> verificar_fallecimiento()) {
+        if(tabla_escritores_-> consulta(isni) -> verificar_fallecimiento()) {
 
             cout << endl;
             anio_fallecimiento = validador.validar_ingreso_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor: ", OPCION_MINIMA);
 
-            lista_escritores_ -> consulta(indice - 1) -> asignar_fallecimiento(anio_fallecimiento);
+            tabla_escritores_-> consulta(isni) -> asignar_fallecimiento(anio_fallecimiento);
             cout << "\nSe ha asignado el anio de fallecimiento en " << anio_fallecimiento <<
-            " para " << lista_escritores_ -> consulta(indice - 1) -> obtener_nombre_completo() << " correctamente." << endl;
+            " para " << tabla_escritores_ -> consulta(isni) -> obtener_nombre_completo() << " correctamente." << endl;
         }
         else
             cout << "\nEste escritor ya tiene anio de fallecimiento asignado" << endl;
@@ -295,8 +313,8 @@ void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
 
 void ProcesadorDeOpciones::listar_escritores() {
 
-    if(!lista_escritores_ -> vacia())
-        lista_escritores_ -> imprimir_lista_escritores();
+    if(!tabla_escritores_ -> vacia())
+        tabla_escritores_ -> imprimir_escritores(false);
     else
         cout << LISTA_ESCRITORES_VACIA;
 }
@@ -373,12 +391,20 @@ void ProcesadorDeOpciones::listar_periodo_lecturas() {
 
 Escritor* ProcesadorDeOpciones::ingresar_escritor() {
 
-    for(int i = 0; i < lista_escritores_ -> obtener_cantidad(); i++)
-        cout << "[" << i + 1 << "] - " << lista_escritores_ -> consulta(i) -> obtener_nombre_completo() << endl << endl;
+    Utilidades validador;
+    int isni = 0;
 
-    int indice = ingresar_indice_lista("Ingrese el indice del escritor del cual desea conocer las obras: ", lista_escritores_ -> obtener_cantidad());
+    tabla_escritores_ -> imprimir_escritores(true);
+
+    while(!tabla_escritores_ -> esta_el_elemento(isni)) {
+        isni = validador.validar_ingreso_entero(isni, "Ingrese el ISNI del escritor del cual desea conocer las obras: ", ISNI_MINIMO);
+        if(isni > ISNI_MAXIMO)
+            cout << ERROR_TIPO_DE_DATO << VOLVER_A_INTENTAR;
+        else if(!tabla_escritores_ -> esta_el_elemento(isni))
+            cout << ERROR_ISNI_INVALIDO + VOLVER_A_INTENTAR;
+    }
     
-    Escritor* escritor = lista_escritores_ -> consulta(indice - 1);
+    Escritor* escritor = tabla_escritores_ -> consulta(isni);
 
     return escritor;
 }
@@ -573,6 +599,6 @@ void ProcesadorDeOpciones::cocinar_pastel_de_papa() {
 
 ProcesadorDeOpciones::~ProcesadorDeOpciones() {
 
-    delete lista_escritores_;
+    delete tabla_escritores_;
     delete lista_lecturas_;
 }

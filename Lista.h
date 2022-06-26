@@ -105,7 +105,7 @@ template <typename Tipo>
 
 bool Lista<Tipo>::hay_siguiente() {
 
-    return actual -> obtener_siguiente() != NULL;
+    return actual != NULL;
 }
 
 

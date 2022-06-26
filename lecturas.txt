@@ -3,21 +3,21 @@ Casa Tomada
 20
 1951
 Bestiario
-(1)
+(1568)
 
 N
 Rayuela
 2900
 1963
 FICCION
-(1)
+(1568)
 
 N
 Misery
 2100
 1987
 TERROR
-(3)
+(1757)
 
 P
 El Poema del Mio Cid
@@ -31,14 +31,14 @@ Voy a dormir
 1
 1938
 14
-(4)
+(4567)
 
 N
 Frankestein
 1600
 1818
 TERROR
-(2)
+(1544)
 
 N
 Una columna de fuego
@@ -46,4 +46,4 @@ Una columna de fuego
 2017
 HISTORICA
 Guerra de religiones en Europa en la segunda mitad del siglo XVI
-(5)
+(5474)

@@ -16,14 +16,14 @@ class ProcesadorDeOpciones {
 private:
 
     // ATRIBUTOS
-    Lista<Escritor*>* lista_escritores_;
+    Hash* tabla_escritores_;
     Lista<Lectura*>* lista_lecturas_;
 
     // METODOS
     char ingresar_tipo_lectura();
     char ingresar_si_o_no(string instruccion);
     int ingresar_genero();
-    Escritor* no_es_escritor_anonimo(int indice, int cantidad_escritores);
+    Escritor* no_es_escritor_anonimo(int isni);
     Lectura* crear_novela_historica(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
     Lectura* crear_novela(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
     Lectura* crear_cuento(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
@@ -43,7 +43,7 @@ public:
 
     // PRE: -
     // POST: Crea un procesador de opciones. 
-    ProcesadorDeOpciones(Lista<Escritor*>* lista_escritores, Lista<Lectura*>* lista_lecturas);
+    ProcesadorDeOpciones(Hash* tabla_escritores, Lista<Lectura*>* lista_lecturas);
 
     // PRE: La lista_lectura esta creada.
     // POST: Agrega una lectura a la lista.
@@ -54,8 +54,8 @@ public:
     void quitar_lectura();
 
     // PRE: La lista_escritores esta creada.
-    // POST: Agrega un escritor a la lista.
-    void agregar_escritor();
+    // POST: Agrega un escritor a la lista. Devuelve su ISNI.
+    int agregar_escritor();
 
     // PRE: La lista_escritores esta creada.
     // POST: Si el escritor no tiene un fallecimiento asignado, se le pide un anio al usuario y se actualiza.

@@ -66,6 +66,8 @@ const std::string ERROR_TIPO_DE_DATO = "\nNo has ingresado el tipo de dato esper
 
 // CONSTANTES DE LA CLASE PROCESAMIENTO DE OPCIONES
 const int OPCION_ALTERNATIVA = -1;
+const int ISNI_MINIMO = 1000;
+const int ISNI_MAXIMO = 9999;
 
 const std::string LISTA_ESCRITORES_VACIA = "No hay escritores cargados. Puedes agregarlos manualmente.\n";
 const std::string LISTA_LECTURAS_VACIA = "No hay lecturas cargadas. Puedes agregarlas manualmente.\n";
@@ -103,7 +105,8 @@ const int CANTIDAD_CLAVES = 20;
 
 const double FACTOR_CARGA = 0.8;
 
-const std::string ERROR_ISNI_INVALIDO = "No se ha encontrado ningun escritor con ese ISNI\n";
+const std::string ERROR_ISNI_INVALIDO = "\nNo se ha encontrado ningun escritor con ese ISNI.";
+const std::string ERROR_ISNI_USADO = "\nYa hay un escritor cargado con ese ISNI.";
 
 
 # endif

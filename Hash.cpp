@@ -14,6 +14,8 @@ Hash::Hash() {
 
 int Hash::aplicar_division(int clave) {
 
+    if(clave < 0)
+        clave = clave * OPCION_ALTERNATIVA;
     return clave % tamanio_tabla_;
 }
 
