@@ -1,13 +1,20 @@
 # include "Escritor.h"
 
 
-Escritor::Escritor(string nombre, string apellido, string nacionalidad, int anio_nacimiento, int anio_fallecimiento) {
+Escritor::Escritor(int isni, string nombre, string apellido, string nacionalidad, int anio_nacimiento, int anio_fallecimiento) {
 
+    isni_ = isni;
     nombre_ = nombre;
     apellido_ = apellido;
     nacionalidad_ = nacionalidad;
     anio_nacimiento_ = anio_nacimiento;
     anio_fallecimiento_ = anio_fallecimiento;
+}
+
+
+int Escritor::obtener_isni() {
+
+    return isni_;
 }
 
 

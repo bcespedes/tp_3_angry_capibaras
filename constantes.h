@@ -98,4 +98,12 @@ const int ES_IGUAL = 0;
 // CONSTANTES DE LA CLASE ESCRITOR
 const int ANIO_DESCONOCIDO = -1;
 
+// CONSTANTES DE LA CLASE HASH
+const int CANTIDAD_CLAVES = 20;
+
+const double FACTOR_CARGA = 0.8;
+
+const std::string ERROR_ISNI_INVALIDO = "No se ha encontrado ningun escritor con ese ISNI\n";
+
+
 # endif
