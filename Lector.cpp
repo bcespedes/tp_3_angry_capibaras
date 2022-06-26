@@ -6,12 +6,12 @@ Lector::Lector() {
 
 }
 
-int Lector::obtener_referencia(string referencia) {
+int Lector::obtener_isni(string isni) {
 
     string num = "";
-    if(referencia != "ANONIMO") {
-        for(int i = 1; referencia[i] != ')'; i++)
-            num += referencia[i];
+    if(isni != "ANONIMO") {
+        for(int i = 1; isni[i] != ')'; i++)
+            num += isni[i];
     }
     else 
         num = "-1";

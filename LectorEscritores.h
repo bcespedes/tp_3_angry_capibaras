@@ -19,8 +19,8 @@ private:
 public:
 
     // PRE: El metodo necesita un texto con escritores para procesar.
-    // POST: Devuelve una lista con los respectivos escritores
-    Lista<Escritor*>* procesar_escritores();
+    // POST: Devuelve una tabla con los respectivos escritores
+    Hash* procesar_escritores();
 
 };
 

@@ -2,12 +2,12 @@
 # include <string.h>
 
 
-Escritor* LectorLecturas::obtener_escritor(Lista<Escritor*>* lista, int referencia) {
+Escritor* LectorLecturas::obtener_escritor(Hash* tabla, int isni) {
 
-    if(referencia == ANONIMO)
+    if(isni == ANONIMO)
         return NULL;
 
-    return lista -> consulta(referencia - 1);
+    return tabla -> consulta(isni);
 }
 
 
@@ -46,55 +46,54 @@ Lectura* LectorLecturas::crear_historica(string titulo, int minutos, int anio, s
 }
 
 
-Lectura* LectorLecturas::crear_novela(string titulo, int duracion, int anio, Lista<Escritor*>* lista_escritores, ifstream &archivo_lecturas, bool leido) {
+Lectura* LectorLecturas::crear_novela(string titulo, int duracion, int anio, Hash* tabla_escritores, ifstream &archivo_lecturas, bool leido) {
 
-    string genero;
-    string referencia;
+    string genero, isni;
     getline(archivo_lecturas, genero);
     Lectura* novela;
 
     if(genero == "HISTORICA") {
         string tema_historico;
         getline(archivo_lecturas, tema_historico);
-        getline(archivo_lecturas, referencia);
-        novela = crear_historica(titulo, duracion, anio , tema_historico, obtener_escritor(lista_escritores, obtener_referencia(referencia)), leido);
+        getline(archivo_lecturas, isni);
+        novela = crear_historica(titulo, duracion, anio , tema_historico, obtener_escritor(tabla_escritores, obtener_isni(isni)), leido);
     }
     else {
-        getline(archivo_lecturas, referencia);
-        novela = new Novela(titulo, duracion, anio,  obtener_escritor(lista_escritores, obtener_referencia(referencia)), leido, convertir_a_genero(genero));
+        getline(archivo_lecturas, isni);
+        novela = new Novela(titulo, duracion, anio,  obtener_escritor(tabla_escritores, obtener_isni(isni)), leido, convertir_a_genero(genero));
     }
     
     return novela;
 }
 
 
-Lectura* LectorLecturas::crear_cuento(string titulo, int minutos, int anio, Lista<Escritor*>* lista_escritores, ifstream &archivo_lecturas, bool leido) {
+Lectura* LectorLecturas::crear_cuento(string titulo, int minutos, int anio, Hash* tabla_escritores, ifstream &archivo_lecturas, bool leido) {
 
-    string libro_publicado, referencia;
+    string libro_publicado, isni;
     
     getline(archivo_lecturas, libro_publicado);
-    getline(archivo_lecturas, referencia);
+    getline(archivo_lecturas, isni);
     
-    Lectura* cuento = new Cuento(titulo, minutos, anio, obtener_escritor(lista_escritores, obtener_referencia(referencia)), leido, libro_publicado);
+    Lectura* cuento = new Cuento(titulo, minutos, anio, obtener_escritor(tabla_escritores, obtener_isni(isni)), leido, libro_publicado);
 
     return cuento;
 }
 
 
-Lectura* LectorLecturas::crear_poema(string titulo, int minutos, int anio,  Lista<Escritor*>* lista_escritores, ifstream &archivo_lecturas, bool leido) {
+Lectura* LectorLecturas::crear_poema(string titulo, int minutos, int anio,  Hash* tabla_escritores, ifstream &archivo_lecturas, bool leido) {
     
-    string cant_versos, referencia;
+    string cant_versos, isni;
 
     getline(archivo_lecturas, cant_versos);
-    getline(archivo_lecturas, referencia);
+    getline(archivo_lecturas, isni);
     
-    Lectura* poema = new Poema(titulo, minutos, anio, obtener_escritor(lista_escritores, obtener_referencia(referencia)), leido, stoi(cant_versos));
+    Lectura* poema = new Poema(titulo, minutos, anio, obtener_escritor(tabla_escritores, obtener_isni(isni)), leido, stoi(cant_versos));
 
     return poema;
 }
 
 
-Lectura* LectorLecturas::crear_lectura(ifstream &archivo_lecturas, Lista<Escritor*>* lista_escritores) {
+Lectura* LectorLecturas::crear_lectura(ifstream &archivo_lecturas, Hash* tabla_escritores) {
 
     char tipo_lectura;
     string titulo, duracion, anio, referencia, genero, tema_historico, cant_versos, libro_publicado;
@@ -108,20 +107,20 @@ Lectura* LectorLecturas::crear_lectura(ifstream &archivo_lecturas, Lista<Escrito
     Lectura* lectura;
 
     if(tipo_lectura == NOVELA)
-        lectura = crear_novela(titulo, stoi(duracion), stoi(anio), lista_escritores, archivo_lecturas, leido);
+        lectura = crear_novela(titulo, stoi(duracion), stoi(anio), tabla_escritores, archivo_lecturas, leido);
 
     else if (tipo_lectura == CUENTO)
-        lectura = crear_cuento(titulo, stoi(duracion), stoi(anio), lista_escritores, archivo_lecturas, leido);
+        lectura = crear_cuento(titulo, stoi(duracion), stoi(anio), tabla_escritores, archivo_lecturas, leido);
         
     else
-        lectura = crear_poema(titulo, stoi(duracion), stoi(anio), lista_escritores, archivo_lecturas, leido);
+        lectura = crear_poema(titulo, stoi(duracion), stoi(anio), tabla_escritores, archivo_lecturas, leido);
 
 
     return lectura;
 
 }
 
-Lista<Lectura*>* LectorLecturas::procesar_lecturas(Lista<Escritor*>* lista_escritores) {
+Lista<Lectura*>* LectorLecturas::procesar_lecturas(Hash* tabla_escritores) {
 
     Utilidades insertador;
     ifstream archivo_lecturas(LECTURAS);
@@ -132,7 +131,7 @@ Lista<Lectura*>* LectorLecturas::procesar_lecturas(Lista<Escritor*>* lista_escri
         Lectura* lectura;
         while(!archivo_lecturas.eof()) {
 
-            lectura = crear_lectura(archivo_lecturas, lista_escritores);
+            lectura = crear_lectura(archivo_lecturas, tabla_escritores);
             insertador.insertar_lectura_ordenada(lectura, lista_lecturas);
         }
     }

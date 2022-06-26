@@ -28,11 +28,12 @@ void LectorEscritores::validar_anios_fin_archivo(int leido, string &anio_nacimie
 
 Escritor* LectorEscritores::crear_escritor(ifstream &archivo_escritores) {
 
-    string nombre, apellido, nacionalidad, referencia, anio_nacimiento, anio_fallecimiento;
+    string isni, nombre, apellido, nacionalidad, anio_nacimiento, anio_fallecimiento;
 
     int leido = 0;
             
-    archivo_escritores >> referencia;
+    archivo_escritores >> isni;
+    int isni_numerico = obtener_isni(isni);
     archivo_escritores.ignore();
     getline(archivo_escritores, nombre, ' ');
     getline(archivo_escritores, apellido);
@@ -50,7 +51,7 @@ Escritor* LectorEscritores::crear_escritor(ifstream &archivo_escritores) {
         falta_fallecimiento(anio_fallecimiento);
     validar_anios_fin_archivo(leido, anio_nacimiento, anio_fallecimiento);
 
-    Escritor* escritor = new Escritor(nombre, apellido, nacionalidad, stoi(anio_nacimiento), stoi(anio_fallecimiento));
+    Escritor* escritor = new Escritor(isni_numerico, nombre, apellido, nacionalidad, stoi(anio_nacimiento), stoi(anio_fallecimiento));
 
     return escritor;
 }
@@ -68,26 +69,21 @@ bool LectorEscritores::validar_archivo(ifstream &archivo_escritores) {
 }
 
 
-Lista<Escritor*>* LectorEscritores::procesar_escritores() {
+Hash* LectorEscritores::procesar_escritores() {
 
     ifstream archivo_escritores(ESCRITORES);
 
-    Lista<Escritor*>* lista_escritores = new Lista<Escritor*>();
+    Hash* tabla_escritores = new Hash();
     if(validar_archivo(archivo_escritores)) { 
-
-        int indice = 0;
         
         while(!archivo_escritores.eof()) {
 
             Escritor* escritor = crear_escritor(archivo_escritores);
-            lista_escritores -> alta(escritor, indice);
-            indice++;
-
+            tabla_escritores -> alta(escritor);
         }
-
     }
 
     archivo_escritores.close();
 
-    return lista_escritores;
+    return tabla_escritores;
 }
