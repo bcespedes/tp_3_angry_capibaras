@@ -5,7 +5,7 @@
 
 int main() {
 
-    Menu menu;
+    //Menu menu;
  
     Grafo grafo;
 
@@ -15,7 +15,7 @@ int main() {
     Lectura *poema = new Poema("poema", 1000, 1900, escritor, false, 7);
     Lectura *cuento = new Cuento("cuento", 49685, 1890, escritor, false, "libro");
     Lectura *novelahist = new Novela("novela2", 3743, 1200, escritor, false, FICCION);
-    Lectura *poema2 = new Poema("poema", 1110, 1950, escritor, false, 10);
+    Lectura *poema2 = new Poema("poema2", 1110, 1950, escritor, false, 10);
 
 
     grafo.agregar_vertice(novela);

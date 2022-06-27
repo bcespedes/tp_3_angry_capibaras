@@ -29,7 +29,7 @@ private:
     void copiar_pesos_padres(int *pesos, int *padres);
     //devuelve la POSICION del peso minimo
     int buscar_peso_minimo(int *pesos);
-    void guardar_aristas(priority_queue< Arista, vector<Arista>, greater<Arista> > cola_prioridad);
+    priority_queue< Arista, vector<Arista>, struct operador_boliviano > *guardar_aristas();
 
 
     

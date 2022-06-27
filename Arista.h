@@ -9,14 +9,17 @@ class Arista{
 private:
     Lectura* origen_;
     Lectura* destino_;
-    //int peso_;
+    int peso_;
 
 public:
     Arista(Lectura* origen, Lectura* destino, int peso);
 
-    int peso_;
-    //int devolver_peso();
 
+    Lectura *devolver_origen();
+    Lectura *devolver_destino();
+    int obtener_peso();
+
+    string obtener_padres();
     //bool operator<(Arista &arista); 
 
 
