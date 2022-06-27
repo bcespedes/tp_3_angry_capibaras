@@ -55,7 +55,6 @@ void Grafo::agregar_vertice(Lectura *d){
     
     agrandar_matriz_adyacencia();
     vertices->alta(d, vertices->obtener_cantidad());
-    cout << "prueba funcion" <<vertices->obtener_posicion(d) << endl;
 }
 
 
@@ -96,7 +95,6 @@ priority_queue< Arista, vector<Arista>, struct operador_boliviano > *Grafo::guar
                 Arista *arista = new Arista(vertices->consulta(j) , vertices->consulta(i), matriz_adyacencia[i][j]);
 
                 cola_prioridad->push(*arista);
-
             }
         }
     }
@@ -110,22 +108,34 @@ Grafo* Grafo::Kruskal(){
 
     priority_queue< Arista, vector<Arista>, struct operador_boliviano > *cola_prioridad = guardar_aristas();
 
-    /*while (arbol_expansion_min->vertices->obtener_cantidad() != vertices->obtener_cantidad()){
+    /*while(!cola_prioridad->empty()){
         Arista a = cola_prioridad->top();
+        cout << a.obtener_padres() << " " << a.obtener_peso() << endl;
+        cola_prioridad->pop();
+    }
 
-        //bool agregar = 
+    cout << vertices->obtener_posicion(a.devolver_destino());
+    cout << vertices->obtener_posicion(a.devolver_origen());*/
+
+    while (arbol_expansion_min->vertices->obtener_cantidad() != vertices->obtener_cantidad()){
+        Arista a = cola_prioridad->top();
+        
+        bool agregar = arbol_expansion_min->vertices->obtener_posicion(a.devolver_origen()) != NO_ENCONTRADO && arbol_expansion_min->vertices->obtener_posicion(a.devolver_destino()) != NO_ENCONTRADO;
         
         
-        if(agregar){
-            arbol_expansion_min->agregar_vertice(a.devolver_origen());
-            arbol_expansion_min->agregar_vertice(a.devolver_destino());
+        if(!agregar){
+            if(arbol_expansion_min->vertices->obtener_posicion(a.devolver_origen()) == NO_ENCONTRADO)
+                arbol_expansion_min->agregar_vertice(a.devolver_origen());
+            if(arbol_expansion_min->vertices->obtener_posicion(a.devolver_destino()) == NO_ENCONTRADO)
+                arbol_expansion_min->agregar_vertice(a.devolver_destino());
+            
             arbol_expansion_min->agregar_camino(a.devolver_origen(), a.devolver_destino(), a.obtener_peso());
             cout << a.obtener_padres() << " " << a.obtener_peso() << endl;
         }
 
         //cout << a.obtener_padres() <<" " << a.obtener_peso() << endl;
         cola_prioridad->pop();
-    }*/
+    }
 
 
 

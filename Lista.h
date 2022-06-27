@@ -167,14 +167,8 @@ int Lista<Tipo>::obtener_posicion(Tipo d){
     if(cantidad == 0)
         return NO_ENCONTRADO;
 
-    int pos = 0;
+    int pos = -1;
     inicializar();
-    /*while(siguiente() != d && pos < cantidad){
-        pos++;
-    }
-    if(pos == cantidad)
-        return NO_ENCONTRADO;*/
-    
     bool esta = false;
     while(hay_siguiente() && !esta){
         if(siguiente() == d){
@@ -182,8 +176,8 @@ int Lista<Tipo>::obtener_posicion(Tipo d){
         }
         pos++;
     }
-    if(esta == false)
-        return NO_ENCONTRADO;
+    if(!esta)
+        pos = NO_ENCONTRADO;
 
     return pos;
 }
