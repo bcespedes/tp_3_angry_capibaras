@@ -16,7 +16,7 @@ Menu::Menu() {
      LectorLecturas lector_lecturas;
      ProcesadorDeOpciones* procesador_opciones = cargar_archivos(lector_escritores, lector_lecturas);
 
-     mantener_abierto_menu(validador, limpiador, procesador_opciones);
+     //mantener_abierto_menu(validador, limpiador, procesador_opciones);
 
      delete procesador_opciones;
 }

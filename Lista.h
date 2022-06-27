@@ -4,6 +4,7 @@
 
 # include "Nodo.h"
 
+const int NO_ENCONTRADO = -1;
 
 template <typename Tipo>
 
@@ -65,6 +66,7 @@ public:
     // POST: Devuelve el tamaño de la lista.
     int obtener_cantidad();
 
+    int obtener_posicion(Tipo d);
     //PRE: -
     //POST: Destruye la lista.
     ~Lista();
@@ -160,6 +162,18 @@ Tipo Lista<Tipo>::consulta(int pos) {
     return aux -> obtener_dato();
 }
 
+template <typename Tipo>
+int Lista<Tipo>::obtener_posicion(Tipo d){
+    int pos = 0;
+    inicializar();
+    while(siguiente() != d && pos < cantidad){
+        pos++;
+    }
+    if(pos == cantidad)
+        return NO_ENCONTRADO;
+
+    return pos;
+}
 
 template <typename Tipo>
 
