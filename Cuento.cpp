@@ -31,6 +31,10 @@ void Cuento::mostrar_lectura() {
 }
 
 
+char Cuento::tipo_lectura(){
+    return 'C';
+}
+
 bool Cuento::coinciden_generos(int genero) {
 
     return false;

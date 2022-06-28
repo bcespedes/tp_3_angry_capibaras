@@ -25,6 +25,8 @@ public:
     // POST: Muestra por pantalla las caracteristicas del cuento.
     void mostrar_lectura();
 
+    char tipo_lectura();
+
     // PRE: -
     // POST: Devuelve false, pues un Cuento no tiene genero.
     bool coinciden_generos(int genero);

@@ -5,6 +5,9 @@ Grafo::Grafo(){
     vertices = new Lista<Lectura *>();
 }
 
+int Grafo::obtener_tamanio(){
+    return vertices->obtener_cantidad();
+}
 
 void Grafo::inicializar_vertice(int **matriz){
 
@@ -76,18 +79,16 @@ void Grafo::agregar_camino(Lectura* origen, Lectura* destino, int peso){
     matriz_adyacencia[pos_destino][pos_origen] = peso;
 }
 
-
-struct operador_boliviano{
+struct operador{
   bool operator()( Arista& origen,  Arista& destino) const
   {
     return origen.obtener_peso() > destino.obtener_peso();
   }
 };
 
-priority_queue< Arista, vector<Arista>, struct operador_boliviano > *Grafo::guardar_aristas(){
+priority_queue< Arista, vector<Arista>, struct operador > *Grafo::guardar_aristas(){
 
-    priority_queue< Arista, vector<Arista>, operador_boliviano > *cola_prioridad = new priority_queue< Arista, vector<Arista>, operador_boliviano >;
-
+    priority_queue< Arista, vector<Arista>, operador > *cola_prioridad = new priority_queue< Arista, vector<Arista>, operador >;
 
     for(int i = 0; i < vertices->obtener_cantidad(); i++){
         for(int j = i; j < vertices->obtener_cantidad(); j++){
@@ -104,44 +105,39 @@ priority_queue< Arista, vector<Arista>, struct operador_boliviano > *Grafo::guar
 }
 
 Grafo* Grafo::Kruskal(){
-    Grafo *arbol_expansion_min = new Grafo();
 
-    priority_queue< Arista, vector<Arista>, struct operador_boliviano > *cola_prioridad = guardar_aristas();
-
-    /*while(!cola_prioridad->empty()){
-        Arista a = cola_prioridad->top();
-        cout << a.obtener_padres() << " " << a.obtener_peso() << endl;
-        cola_prioridad->pop();
+    if(vertices->obtener_cantidad() <= 1){
+        return NULL;
     }
 
-    cout << vertices->obtener_posicion(a.devolver_destino());
-    cout << vertices->obtener_posicion(a.devolver_origen());*/
+    Grafo *arbol_expansion_min = new Grafo();
+
+    priority_queue< Arista, vector<Arista>, struct operador > *cola_prioridad = guardar_aristas();
 
     while (arbol_expansion_min->vertices->obtener_cantidad() != vertices->obtener_cantidad()){
         Arista a = cola_prioridad->top();
-        
-        bool agregar = arbol_expansion_min->vertices->obtener_posicion(a.devolver_origen()) != NO_ENCONTRADO && arbol_expansion_min->vertices->obtener_posicion(a.devolver_destino()) != NO_ENCONTRADO;
-        
-        
-        if(!agregar){
-            if(arbol_expansion_min->vertices->obtener_posicion(a.devolver_origen()) == NO_ENCONTRADO)
+
+        bool pos_origen = arbol_expansion_min->vertices->obtener_posicion(a.devolver_origen()) == NO_ENCONTRADO;
+        bool pos_destino = arbol_expansion_min->vertices->obtener_posicion(a.devolver_destino()) == NO_ENCONTRADO;
+                
+        if(pos_origen || pos_destino){
+
+            if(pos_origen)
                 arbol_expansion_min->agregar_vertice(a.devolver_origen());
-            if(arbol_expansion_min->vertices->obtener_posicion(a.devolver_destino()) == NO_ENCONTRADO)
+            if(pos_destino)
                 arbol_expansion_min->agregar_vertice(a.devolver_destino());
             
             arbol_expansion_min->agregar_camino(a.devolver_origen(), a.devolver_destino(), a.obtener_peso());
             cout << a.obtener_padres() << " " << a.obtener_peso() << endl;
         }
 
-        //cout << a.obtener_padres() <<" " << a.obtener_peso() << endl;
         cola_prioridad->pop();
     }
-
-
 
     return arbol_expansion_min;
 }
 
 Grafo::~Grafo(){
-
+    liberar_matriz_adyacencia();
+    delete vertices;
 }

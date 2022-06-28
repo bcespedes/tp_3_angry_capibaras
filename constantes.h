@@ -24,7 +24,7 @@ enum generos {
 
 
 // CONSTANTES DEL MENU PRINCIPAL.
-const int OPCION_MAXIMA_MENU = 13;
+const int OPCION_MAXIMA_MENU = 14;
 
 const std::string OPCION_1 = "1. Agregar una nueva lectura a la lista";
 const std::string OPCION_2 = "2. Quitar una lectura de la lista";
@@ -37,7 +37,8 @@ const std::string OPCION_8 = "8. Listar las lecturas entre determinados anios";
 const std::string OPCION_9 = "9. Listar las lecturas de un determinado escritor";
 const std::string OPCION_10 = "10. Listar las novelas de determinado genero";
 const std::string OPCION_11 = "11. Armar una cola ordenada por tiempo de lectura";
-const std::string OPCION_12 = "12. Salir\n";
+const std::string OPCION_12 = "12. Mostrar orden y tiempo minimo para leer todas las lecturas";
+const std::string OPCION_13 = "13. Salir\n";
 
 const std::string OPCION_INVALIDA_MENU = "Por favor seleccione una opcion valida" ;
 const std::string ESCRIBA_OPCION_MENU = "Escriba una opcion: ";
@@ -57,6 +58,7 @@ enum cant_opciones_menu {
      LISTAR_LECTURA_POR_ESCRITOR,
      LISTAR_NOVELAS_POR_GENERO,
      ARMAR_COLA,
+     MENOR_TIEMPO_LECTURA,
      SALIR,
      COCINAR_PASTEL_DE_PAPA
 };
@@ -91,6 +93,7 @@ const std::string LECTURAS = "lecturas.txt";
 const char NOVELA = 'N';
 const char CUENTO = 'C';
 const char POEMA = 'P';
+const char NOV_HISTORICA = 'H';
 
 // CONSTANTES DE LA CLASE LECTURA
 const int ES_MAYOR = 1;

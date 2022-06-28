@@ -22,6 +22,7 @@ public:
     string obtener_padres();
     //bool operator<(Arista &arista); 
 
+    ~Arista();
 
 };
 

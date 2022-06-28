@@ -95,6 +95,9 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
           case ARMAR_COLA:
                procesador_opciones -> crear_cola_ordenada();
                break;
+          case MENOR_TIEMPO_LECTURA:
+               //procesador_opciones -> ...
+               break;
           case SALIR:
                cerrar_menu = true;
                mensaje_despedida();
