@@ -12,13 +12,6 @@ Rayuela
 FICCION
 (1568)
 
-N
-Misery
-2100
-1987
-TERROR
-(1757)
-
 P
 El Poema del Mio Cid
 480
@@ -32,13 +25,6 @@ Voy a dormir
 1938
 14
 (4567)
-
-N
-Frankestein
-1600
-1818
-TERROR
-(1544)
 
 N
 Una columna de fuego

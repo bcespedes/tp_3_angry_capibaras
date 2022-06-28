@@ -104,6 +104,29 @@ priority_queue< Arista, vector<Arista>, struct operador > *Grafo::guardar_arista
 
 }
 
+void Grafo::mostrar_grafo(){
+    int duracion_total = 0;
+    Lectura* vertice1;
+    Lectura* vertice2;
+    for(int i = 0; i < vertices->obtener_cantidad(); i++){
+        for(int j = i; j < vertices->obtener_cantidad(); j++){
+            if(i != j && matriz_adyacencia[i][j] != INFINITO){
+                vertice1 = vertices->consulta(i);
+                vertice2 = vertices->consulta(j);
+                cout << vertice1->obtener_titulo() << "(Duracion: "<< vertice1->obtener_minutos() << ")" << endl;
+                cout << "   Siesta de: "<< matriz_adyacencia[i][j] << endl;
+                cout << vertice2->obtener_titulo() << "(Duracion: "<< vertice2->obtener_minutos() << ")" << endl << endl;
+
+                duracion_total += matriz_adyacencia[i][j] + vertice1->obtener_minutos() + vertice2->obtener_minutos();
+            }
+        }
+    }
+    cout << "Tiempo total estimado: " << duracion_total << endl;
+
+}
+
+
+
 Grafo* Grafo::Kruskal(){
 
     if(vertices->obtener_cantidad() <= 1){
@@ -128,14 +151,16 @@ Grafo* Grafo::Kruskal(){
                 arbol_expansion_min->agregar_vertice(a.devolver_destino());
             
             arbol_expansion_min->agregar_camino(a.devolver_origen(), a.devolver_destino(), a.obtener_peso());
-            cout << a.obtener_padres() << " " << a.obtener_peso() << endl;
+            //cout << a.obtener_padres() << " " << a.obtener_peso() << endl;
         }
 
         cola_prioridad->pop();
     }
 
+    delete cola_prioridad;
     return arbol_expansion_min;
 }
+
 
 Grafo::~Grafo(){
     liberar_matriz_adyacencia();

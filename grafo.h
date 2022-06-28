@@ -1,5 +1,5 @@
 #ifndef GRAFO_H
-#define GRAFO_h
+#define GRAFO_H
 
 
 #include "Nodo.h"
@@ -43,6 +43,8 @@ public:
     void agregar_camino(Lectura* origen, Lectura* destino, int peso);
 
     int obtener_tamanio();
+
+    //void guardar_aristas();
 
     void mostrar_grafo();
 

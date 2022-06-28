@@ -5,9 +5,9 @@
 
 int main() {
 
-    //Menu menu;
+    Menu menu;
  
-    Grafo grafo;
+    /*Grafo grafo;
 
     Escritor *escritor = new Escritor(2222, "Juan", "Pedro", "Chile", 1969, 2000);
 
@@ -35,7 +35,7 @@ int main() {
     grafo.agregar_camino(poema2, novela, 5);
     grafo.agregar_camino(novela, novelahist, 60);
 
-    grafo.Kruskal();
+    grafo.Kruskal();*/
 
     return 0;
 }

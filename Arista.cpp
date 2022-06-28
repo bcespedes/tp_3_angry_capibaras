@@ -23,4 +23,7 @@ Lectura *Arista::devolver_destino(){
     return destino_;
 }
 
+Arista::~Arista(){
+}
+
 

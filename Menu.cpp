@@ -16,7 +16,7 @@ Menu::Menu() {
      LectorLecturas lector_lecturas;
      ProcesadorDeOpciones* procesador_opciones = cargar_archivos(lector_escritores, lector_lecturas);
 
-     //mantener_abierto_menu(validador, limpiador, procesador_opciones);
+     mantener_abierto_menu(validador, limpiador, procesador_opciones);
 
      delete procesador_opciones;
 }
@@ -55,6 +55,7 @@ void Menu::mostrar_menu() {
      cout << OPCION_10 << endl;
      cout << OPCION_11 << endl;
      cout << OPCION_12 << endl;
+     cout << OPCION_13 << endl;
 }
 
 
@@ -96,7 +97,7 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
                procesador_opciones -> crear_cola_ordenada();
                break;
           case MENOR_TIEMPO_LECTURA:
-               //procesador_opciones -> ...
+               procesador_opciones -> menor_tiempo_lectura();
                break;
           case SALIR:
                cerrar_menu = true;
