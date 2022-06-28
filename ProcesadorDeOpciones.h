@@ -6,6 +6,7 @@
 # include "Utilidades.h"
 # include "LectorLecturas.h"
 # include "Cola.h"
+# include "grafo.h"
 # include "stdlib.h"
 # include "time.h"
 # include <string.h>
@@ -38,6 +39,9 @@ private:
     int obtener_cantidad_lecturas_sin_leer();
     void ingresar_reinicio_de_cola();
     void reiniciar_cola_lecturas();
+    Grafo* crear_grafo();
+    void conectar_grafo(Grafo *grafo);
+    int validar_peso_arista(Lectura *vertice1, Lectura *vertice2);
 
 public:
 
@@ -88,6 +92,8 @@ public:
     // PRE: -
     // POST: Crea una cola ordenada por duracion en base a las lecturas no leidas.
     void crear_cola_ordenada();
+
+    void menor_tiempo_lectura();
 
     // PRE: -
     // POST: 50% de posibilidades de cocinar un delicioso pastel de papa.

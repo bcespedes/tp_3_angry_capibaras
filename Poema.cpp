@@ -29,6 +29,10 @@ void Poema::mostrar_lectura() {
         cout << "ANONIMO" << endl << endl;
 }
 
+char Poema::tipo_lectura(){
+    return 'P';
+}
+
 
 bool Poema::coinciden_generos(int genero) {
 

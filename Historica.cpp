@@ -43,6 +43,10 @@ bool Historica::coinciden_generos(int genero) {
 }
 
 
+char Historica::tipo_lectura(){
+    return 'H';
+}
+
 Historica::~Historica() {
 
     delete [] tema_;

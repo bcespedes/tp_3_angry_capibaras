@@ -45,6 +45,10 @@ void Novela::mostrar_lectura() {
         cout << "ANONIMO" << endl << endl;
 }
 
+char Novela::tipo_lectura(){
+    return 'N';
+}
+
 
 bool Novela::coinciden_generos(int genero) {
 

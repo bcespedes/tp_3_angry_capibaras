@@ -29,6 +29,9 @@ public:
     // POST: Devuelve un string con el genero de la novela.
     string convertir_genero_a_string();
 
+    char tipo_lectura();
+
+
     // PRE: genero es un genero valido. (ver indices de genero en enum)
     // POST: Devuelve true si genero es igual al genero de la novela, false en caso contrario.
     bool coinciden_generos(int genero);
