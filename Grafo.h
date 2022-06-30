@@ -53,8 +53,8 @@ public:
     void mostrar_grafo();
 
     // PRE: -
-    // POST: Aplica el algoritmo de Kruskal y devuelve un arbol de expansion minima.
-    Grafo* Kruskal();
+    // POST: Crea el arbol de expansion minima y lo devuelve.
+    Grafo* crear_arbol_expansion_minima();
 
     // PRE: -
     // POST: Destruye el grafo.

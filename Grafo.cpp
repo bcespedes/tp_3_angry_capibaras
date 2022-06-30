@@ -117,58 +117,70 @@ priority_queue< Arista, vector<Arista>, struct operador >* Grafo::guardar_arista
 
 void Grafo::mostrar_grafo() {
 
-    int duracion_total = 0;
+    int tiempo_lectura = 0, tiempo_siesta = 0;
     Lectura* vertice1;
     Lectura* vertice2;
-    for(int i = 0; i < vertices -> obtener_cantidad(); i++) {
-        vertice1 = vertices -> consulta(i);
+    if(vertices -> obtener_cantidad() > 1) {
+        for(int i = 0; i < vertices -> obtener_cantidad(); i++) {
+            vertice1 = vertices -> consulta(i);
 
-        for(int j = i; j < vertices -> obtener_cantidad(); j++) {
-            if(i != j && matriz_adyacencia[i][j] != INFINITO) {
-                vertice2 = vertices -> consulta(j);
-                cout << vertice1 -> obtener_titulo() << "(Duracion: "<< vertice1 -> obtener_minutos() << ")" << endl;
-                cout << "   Siesta de: "<< matriz_adyacencia[i][j] << endl;
-                cout << vertice2 -> obtener_titulo() << "(Duracion: "<< vertice2 -> obtener_minutos() << ")" << endl << endl;
+            for(int j = i; j < vertices -> obtener_cantidad(); j++) {
+                if(i != j && matriz_adyacencia[i][j] != INFINITO) {
+                    vertice2 = vertices -> consulta(j);
+                    cout << vertice1 -> obtener_titulo() << " (Duracion de: "<< vertice1 -> obtener_minutos() << " minutos)";
+                    cout << " -----> Siesta de: "<< matriz_adyacencia[i][j] << " minutos -----> ";
+                    cout << vertice2 -> obtener_titulo() << " (Duracion de: "<< vertice2 -> obtener_minutos() << " minutos)" << endl << endl;
 
-                duracion_total += matriz_adyacencia[i][j] + vertice1 -> obtener_minutos() + vertice2 -> obtener_minutos();
+                    tiempo_siesta += matriz_adyacencia[i][j];
+                    tiempo_lectura += vertice1 -> obtener_minutos() + vertice2 -> obtener_minutos();
+                }
             }
         }
+        cout << "Se ha dormido siesta durante " << tiempo_siesta << " minutos." << endl;
+        cout << "Se ha leido aproximadamente durante " << tiempo_lectura << " minutos." << endl;
+        cout << "Tiempo total estimado: " << tiempo_siesta + tiempo_lectura << " minutos." << endl;
     }
-    cout << "Tiempo total estimado: " << duracion_total << endl;
+    else {
+        vertice1 = vertices -> consulta(0);
+        cout << "Solo hay una lectura cargada por lo que se leera -----> " << vertice1 -> obtener_titulo() <<
+        " (Duracion de: " << vertice1 -> obtener_minutos() << " minutos)" << endl;
+    }
 
 }
 
 
-Grafo* Grafo::Kruskal() {
+Grafo* Grafo::crear_arbol_expansion_minima() {
 
-    if(vertices -> obtener_cantidad() <= 1) {
-        return NULL;
-    }
+    Grafo* arbol_expansion_min;
+    if(vertices -> obtener_cantidad() > 1) {
 
-    Grafo* arbol_expansion_min = new Grafo();
+        arbol_expansion_min = new Grafo();
 
-    priority_queue< Arista, vector<Arista>, struct operador >* cola_prioridad = guardar_aristas();
+        priority_queue< Arista, vector<Arista>, struct operador >* cola_prioridad = guardar_aristas();
 
-    while (arbol_expansion_min -> vertices -> obtener_cantidad() != vertices -> obtener_cantidad()) {
-        Arista a = cola_prioridad -> top();
+        while (arbol_expansion_min -> vertices -> obtener_cantidad() != vertices -> obtener_cantidad()) {
+            Arista a = cola_prioridad -> top();
 
-        bool pos_origen = arbol_expansion_min -> vertices -> obtener_posicion(a.devolver_origen()) == NO_ENCONTRADO;
-        bool pos_destino = arbol_expansion_min -> vertices -> obtener_posicion(a.devolver_destino()) == NO_ENCONTRADO;
+            bool pos_origen = arbol_expansion_min -> vertices -> obtener_posicion(a.devolver_origen()) == NO_ENCONTRADO;
+            bool pos_destino = arbol_expansion_min -> vertices -> obtener_posicion(a.devolver_destino()) == NO_ENCONTRADO;
+                    
+            if(pos_origen || pos_destino) {
+
+                if(pos_origen)
+                    arbol_expansion_min -> agregar_vertice(a.devolver_origen());
+                if(pos_destino)
+                    arbol_expansion_min -> agregar_vertice(a.devolver_destino());
                 
-        if(pos_origen || pos_destino) {
+                arbol_expansion_min -> agregar_camino(a.devolver_origen(), a.devolver_destino(), a.obtener_peso());
+            }
 
-            if(pos_origen)
-                arbol_expansion_min -> agregar_vertice(a.devolver_origen());
-            if(pos_destino)
-                arbol_expansion_min -> agregar_vertice(a.devolver_destino());
-            
-            arbol_expansion_min -> agregar_camino(a.devolver_origen(), a.devolver_destino(), a.obtener_peso());
+            cola_prioridad -> pop();
         }
-
-        cola_prioridad -> pop();
+        delete cola_prioridad;
     }
+    else
+        arbol_expansion_min = NULL;
 
-    delete cola_prioridad;
     return arbol_expansion_min;
 }
 

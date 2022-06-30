@@ -659,11 +659,17 @@ void ProcesadorDeOpciones::menor_tiempo_lectura() {
     if(!lista_lecturas_ -> vacia()) {
         Grafo* grafo = crear_grafo();
         cout << "Para leer todas las lecturas en el menor tiempo, debemos seguir lo siguiente: " << endl << endl;
-        Grafo* arbol_expansion_min = grafo -> Kruskal();
-        arbol_expansion_min -> mostrar_grafo();
+        Grafo* arbol_expansion_min = grafo -> crear_arbol_expansion_minima();
+        if(arbol_expansion_min)
+            arbol_expansion_min -> mostrar_grafo();
+        else
+            grafo -> mostrar_grafo();
         delete grafo;
         delete arbol_expansion_min;
     }
+    else
+        cout << LISTA_LECTURAS_VACIA;
+
 }
 
 
