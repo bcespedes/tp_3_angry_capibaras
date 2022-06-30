@@ -25,7 +25,6 @@ const std::string OPCION_11 = "11. Armar una cola ordenada por tiempo de lectura
 const std::string OPCION_12 = "12. Mostrar orden y tiempo minimo para leer todas las lecturas";
 const std::string OPCION_13 = "13. Salir\n";
 
-const std::string OPCION_INVALIDA_MENU = "Por favor seleccione una opcion valida" ;
 const std::string ESCRIBA_OPCION_MENU = "Escriba una opcion: ";
 const std::string MENSAJE_BIENVENIDA_MENU =  "Bienvenidos al club de lectura de Sid! Elija lo que desea realizar. \n";
 const std::string MENSAJE_DESPEDIDA_MENU =  "Gracias por venir al club de lectura de Sid! Esperamos verte pronto de vuelta <3\n";
@@ -50,6 +49,7 @@ enum cant_opciones_menu {
 
 // CONSTANTES DE LA CLASE PROCESAMIENTO DE OPCIONES
 const int OPCION_ALTERNATIVA = -1;
+const int ANIO_ACTUAL = 2022;
 const int ISNI_MINIMO = 1000;
 const int ISNI_MAXIMO = 9999;
 
