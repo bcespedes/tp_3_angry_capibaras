@@ -6,7 +6,7 @@
 # include "Utilidades.h"
 # include "LectorLecturas.h"
 # include "Cola.h"
-# include "grafo.h"
+# include "Grafo.h"
 # include "stdlib.h"
 # include "time.h"
 # include <string.h>

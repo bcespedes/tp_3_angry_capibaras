@@ -20,8 +20,6 @@ private:
     int anio_nacimiento_;
     int anio_fallecimiento_;
 
-
-
 public:
 
     // PRE: -

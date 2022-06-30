@@ -29,7 +29,8 @@ void Poema::mostrar_lectura() {
         cout << "ANONIMO" << endl << endl;
 }
 
-char Poema::tipo_lectura(){
+
+char Poema::tipo_lectura() {
     return 'P';
 }
 

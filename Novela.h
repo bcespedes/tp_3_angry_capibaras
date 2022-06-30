@@ -1,6 +1,7 @@
 # ifndef NOVELA_H
 # define NOVELA_H
 
+
 # include "constantes.h"
 # include "Lectura.h"
 
@@ -29,6 +30,9 @@ public:
     // POST: Devuelve un string con el genero de la novela.
     string convertir_genero_a_string();
 
+
+    // PRE: -
+    // POST: devuelve un char 'N'.
     char tipo_lectura();
 
 

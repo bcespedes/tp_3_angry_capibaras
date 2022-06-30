@@ -3,8 +3,8 @@
 
 
 # include "Nodo.h"
+# include "constantes.h"
 
-const int NO_ENCONTRADO = -1;
 
 template <typename Tipo>
 
@@ -14,16 +14,21 @@ private:
 
     int cantidad;
     Nodo<Tipo>* primero;
+    Nodo<Tipo>* actual;
     bool eliminar_dato;
 
 public:
-    Nodo<Tipo>* actual;
 
     // PRE: -
     // POST: Crea una lista vacia.
     Lista();
 
     void no_eliminar();
+    // PRE: -
+    // POST: eliminar_dato se pone en false. 
+    // Al hacer la baja, simplemente se desconectara el nodo y no se eliminara el dato interno.
+    void no_eliminar_dato();
+
     // PRE: -
     // POST: Mueve el actual al inicio de la lista.
     void inicializar();
@@ -89,8 +94,11 @@ Lista<Tipo>::Lista() {
     eliminar_dato = true;
 }
 
+
 template <typename Tipo>
-void Lista<Tipo>::no_eliminar(){
+
+void Lista<Tipo>::no_eliminar_dato() {
+
     eliminar_dato = false;
 }
 
@@ -170,7 +178,9 @@ Tipo Lista<Tipo>::consulta(int pos) {
     return aux -> obtener_dato();
 }
 
+
 template <typename Tipo>
+
 int Lista<Tipo>::obtener_posicion(Tipo d){
     if(cantidad == 0)
         return NO_ENCONTRADO;
@@ -189,6 +199,7 @@ int Lista<Tipo>::obtener_posicion(Tipo d){
 
     return pos;
 }
+
 
 template <typename Tipo>
 
@@ -228,12 +239,12 @@ void Lista<Tipo>::baja(int pos) {
     }
     cantidad--;
 
-
-    if(!eliminar_dato){
-        borrar->asignar_dato(NULL);
+    if(!eliminar_dato) {
+        borrar -> asignar_dato_a_null();
     }
-    delete borrar;
 
+
+    delete borrar; 
 }
 
 
