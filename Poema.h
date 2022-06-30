@@ -25,6 +25,9 @@ public:
     // POST: Muestra por pantalla las caracteristicas del poema.
     void mostrar_lectura();
 
+
+    // PRE: -
+    // POST: devuelve un char 'P'.
     char tipo_lectura();
 
     // PRE: - 

@@ -34,7 +34,7 @@ void Grafo::liberar_matriz_adyacencia(){
     for(int i = 0; i < vertices->obtener_cantidad(); i++){
         delete [] matriz_adyacencia[i];
     }
-    delete matriz_adyacencia;
+    delete [] matriz_adyacencia;
 }
 
 
@@ -93,9 +93,8 @@ priority_queue< Arista, vector<Arista>, struct operador > *Grafo::guardar_arista
     for(int i = 0; i < vertices->obtener_cantidad(); i++){
         for(int j = i; j < vertices->obtener_cantidad(); j++){
             if(i != j){
-                Arista *arista = new Arista(vertices->consulta(j) , vertices->consulta(i), matriz_adyacencia[i][j]);
-
-                cola_prioridad->push(*arista);
+                Arista arista(vertices->consulta(j) , vertices->consulta(i), matriz_adyacencia[i][j]);
+                cola_prioridad->push(arista);
             }
         }
     }
@@ -109,9 +108,10 @@ void Grafo::mostrar_grafo(){
     Lectura* vertice1;
     Lectura* vertice2;
     for(int i = 0; i < vertices->obtener_cantidad(); i++){
+        vertice1 = vertices->consulta(i);
+
         for(int j = i; j < vertices->obtener_cantidad(); j++){
             if(i != j && matriz_adyacencia[i][j] != INFINITO){
-                vertice1 = vertices->consulta(i);
                 vertice2 = vertices->consulta(j);
                 cout << vertice1->obtener_titulo() << "(Duracion: "<< vertice1->obtener_minutos() << ")" << endl;
                 cout << "   Siesta de: "<< matriz_adyacencia[i][j] << endl;
@@ -124,7 +124,6 @@ void Grafo::mostrar_grafo(){
     cout << "Tiempo total estimado: " << duracion_total << endl;
 
 }
-
 
 
 Grafo* Grafo::Kruskal(){
@@ -151,7 +150,6 @@ Grafo* Grafo::Kruskal(){
                 arbol_expansion_min->agregar_vertice(a.devolver_destino());
             
             arbol_expansion_min->agregar_camino(a.devolver_origen(), a.devolver_destino(), a.obtener_peso());
-            //cout << a.obtener_padres() << " " << a.obtener_peso() << endl;
         }
 
         cola_prioridad->pop();
@@ -164,5 +162,6 @@ Grafo* Grafo::Kruskal(){
 
 Grafo::~Grafo(){
     liberar_matriz_adyacencia();
+    vertices->no_eliminar_dato();
     delete vertices;
 }

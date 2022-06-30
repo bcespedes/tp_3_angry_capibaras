@@ -29,6 +29,9 @@ public:
     // POST: Devuelve un string con el genero de la novela.
     string convertir_genero_a_string();
 
+
+    // PRE: -
+    // POST: devuelve un char 'N'.
     char tipo_lectura();
 
 

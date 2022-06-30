@@ -15,12 +15,23 @@ private:
     int cantidad;
     Nodo<Tipo>* primero;
     Nodo<Tipo>* actual;
+    bool eliminar_dato;
 
 public:
 
     // PRE: -
     // POST: Crea una lista vacia.
     Lista();
+
+    // PRE: -
+    // POST: eliminar_dato se pone en false. 
+    // Al hacer la baja, simplemente se desconectara el nodo y no se eliminara el dato interno.
+    void no_eliminar_dato();
+
+    // PRE: -
+    // POST: eliminar_dato se pone en true. 
+    // La baja se hace con normalidad.
+    void eliminar_dato();
 
     // PRE: -
     // POST: Mueve el actual al inicio de la lista.
@@ -84,8 +95,18 @@ Lista<Tipo>::Lista() {
     cantidad = 0;
     primero = NULL;
     actual = NULL;
+    eliminar_dato = true;
 }
 
+template <typename Tipo>
+void Lista<Tipo>::no_eliminar_dato(){
+    eliminar_dato = false;
+}
+
+template <typename Tipo>
+void Lista<Tipo>::eliminar_dato(){
+    eliminar_dato = true;
+}
 
 template <typename Tipo>
 
@@ -219,6 +240,11 @@ void Lista<Tipo>::baja(int pos) {
         anterior -> cambiar_siguiente(borrar -> obtener_siguiente());
     }
     cantidad--;
+
+    if(!eliminar_dato){
+        borrar->asignar_dato_a_null();
+    }
+
 
     delete borrar; 
 }
