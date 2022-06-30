@@ -23,6 +23,7 @@ public:
     // POST: Crea una lista vacia.
     Lista();
 
+    void no_eliminar();
     // PRE: -
     // POST: eliminar_dato se pone en false. 
     // Al hacer la baja, simplemente se desconectara el nodo y no se eliminara el dato interno.
@@ -238,7 +239,7 @@ void Lista<Tipo>::baja(int pos) {
     }
     cantidad--;
 
-    if(!eliminar_dato){
+    if(!eliminar_dato) {
         borrar -> asignar_dato_a_null();
     }
 

@@ -645,6 +645,7 @@ void ProcesadorDeOpciones::conectar_grafo(Grafo* grafo) {
     }
 }
 
+
 Grafo* ProcesadorDeOpciones::crear_grafo() {
 
     Grafo* grafo = new Grafo();

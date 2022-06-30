@@ -9,7 +9,6 @@ Cuento::Cuento(string titulo, unsigned int minutos, unsigned int anio, Escritor*
 
 
 string Cuento::obtener_libro() {
-
     return libro_;
 }
 
