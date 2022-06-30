@@ -22,7 +22,7 @@ int Hash::aplicar_division(int clave) {
 
 int Hash::obtener_posicion_elemento(int clave) {
 
-    int posicion = -1, indice = aplicar_division(clave);
+    int posicion = NO_ENCONTRADO, indice = aplicar_division(clave);
     bool esta = false;
 
     Lista<Escritor*>* lista_escritores = tabla_hash_[indice];
@@ -34,7 +34,7 @@ int Hash::obtener_posicion_elemento(int clave) {
     }
 
     if(!esta)
-        posicion = -1;
+        posicion = NO_ENCONTRADO;
 
     return posicion;
 }

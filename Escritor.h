@@ -43,6 +43,10 @@ public:
     string obtener_nacionalidad();
 
     // PRE: -
+    // POST: Devuelve el anio de nacimiento del autor.
+    int obtener_anio_nacimiento();
+
+    // PRE: -
     // POST: Devuelve true si el fallecimiento es desconocido, false en caso contrario.
     bool verificar_fallecimiento();
 

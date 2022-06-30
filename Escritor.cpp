@@ -30,6 +30,12 @@ string Escritor::obtener_nacionalidad() {
 }
 
 
+int Escritor::obtener_anio_nacimiento() {
+
+    return anio_nacimiento_;
+}
+
+
 bool Escritor::verificar_fallecimiento() {
 
     return anio_fallecimiento_ == ANIO_DESCONOCIDO;
