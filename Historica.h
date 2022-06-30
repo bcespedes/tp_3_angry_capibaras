@@ -29,6 +29,9 @@ public:
     // POST: Devuelve true si genero es HISTORICA, false de caso contrario.
     bool coinciden_generos(int genero);
 
+
+    // PRE: -
+    // POST: devuelve un char 'H'.
     char tipo_lectura();
 
     // PRE: -

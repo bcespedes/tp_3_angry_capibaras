@@ -107,7 +107,7 @@ Tipo Cola<Tipo>::baja() {
     if(!primero)
         ultimo = NULL;
 
-    borrar->asignar_dato(NULL);
+    borrar->asignar_dato_a_null();
     delete borrar;
     cantidad--;
  

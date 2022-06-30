@@ -72,7 +72,9 @@ public:
     // POST: Devuelve true si genero es igual al genero de la lectura, false en caso contrario (solo aplica para novelas).
     virtual bool coinciden_generos(int genero) = 0;
 
-    // devuelve N si es novela, H historica, P poema, C cuento
+
+    // PRE: -
+    // POST: devuelve un char indicando el tipo de lectura.
     virtual char tipo_lectura() = 0;
     // PRE: -
     // POST: Destruye la lectura.

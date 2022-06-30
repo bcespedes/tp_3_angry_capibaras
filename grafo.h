@@ -36,20 +36,33 @@ private:
 
 public:
 
+    // PRE: -
+    // POST: Crea un grafo.
     Grafo();
 
+    // PRE: d es un tipo valido.
+    // POST: Agrega un vertice al grafo.
     void agregar_vertice(Lectura *d);
 
+
+    // PRE: origen, destino y peso son datos validos.
+    // POST: Agrega un camino ponderado entre el origen y el destino (es no direccionado)
     void agregar_camino(Lectura* origen, Lectura* destino, int peso);
 
+    // PRE: -
+    // POST: Devuelve la cantidad de vertices del grafo.
     int obtener_tamanio();
 
-    //void guardar_aristas();
-
+    // PRE: -
+    // POST: Muestra por pantalla los vertices y aristas con su peso.
     void mostrar_grafo();
 
+    // PRE: -
+    // POST: Aplica el algoritmo de Kruskal y devuelve un arbol de expansion minima.
     Grafo* Kruskal();
      
+    // PRE: -
+    // POST: destruye el grafo.
     ~Grafo();
 
 };

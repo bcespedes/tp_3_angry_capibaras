@@ -25,6 +25,8 @@ public:
     // POST: Muestra por pantalla las caracteristicas del cuento.
     void mostrar_lectura();
 
+    // PRE: -
+    // POST: devuelve un char 'C'.
     char tipo_lectura();
 
     // PRE: -
