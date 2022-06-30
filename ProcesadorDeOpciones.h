@@ -31,6 +31,7 @@ private:
     Lectura* crear_poema(string titulo, int duracion, int anio, Escritor* escritor, bool leido);
     Lectura* crear_lectura(char tipo_lectura, string titulo, int duracion, int anio, Escritor* escritor);
     int ingresar_indice_lista(string instruccion, int cantidad_datos);
+    void eliminar_lecturas_asociadas(Escritor* escritor);
     int ingresar_anio_correcto(int anio_inferior);
     Escritor* ingresar_escritor();
     int obtener_indice_mayor_duracion();
@@ -61,6 +62,8 @@ public:
     // PRE: La lista_escritores esta creada.
     // POST: Agrega un escritor a la lista. Devuelve su ISNI.
     int agregar_escritor();
+
+    void quitar_escritor();
 
     // PRE: La lista_escritores esta creada.
     // POST: Si el escritor no tiene un fallecimiento asignado, se le pide un anio al usuario y se actualiza.
