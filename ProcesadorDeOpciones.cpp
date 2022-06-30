@@ -286,14 +286,19 @@ void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
                 cout << ERROR_ISNI_INVALIDO + VOLVER_A_INTENTAR;
         }
 
-        if(tabla_escritores_-> consulta(isni) -> verificar_fallecimiento()) {
+        Escritor* escritor = tabla_escritores_ -> consulta(isni);
+        if(escritor -> verificar_fallecimiento()) {
 
             cout << endl;
             anio_fallecimiento = validador.validar_ingreso_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor: ", OPCION_MINIMA, ANIO_ACTUAL);
+            while(anio_fallecimiento < escritor -> obtener_anio_nacimiento()) {
+                cout << ERROR_INGRESO_INCORRECTO + VOLVER_A_INTENTAR;
+                anio_fallecimiento = validador.validar_ingreso_entero(anio_fallecimiento, "Ingrese el anio de fallecimiento del escritor: ", OPCION_MINIMA, ANIO_ACTUAL);
+            }
 
-            tabla_escritores_-> consulta(isni) -> asignar_fallecimiento(anio_fallecimiento);
+            escritor -> asignar_fallecimiento(anio_fallecimiento);
             cout << "\nSe ha asignado el anio de fallecimiento en " << anio_fallecimiento <<
-            " para " << tabla_escritores_ -> consulta(isni) -> obtener_nombre_completo() << " correctamente." << endl;
+            " para " << escritor -> obtener_nombre_completo() << " correctamente." << endl;
         }
         else
             cout << "\nEste escritor ya tiene anio de fallecimiento asignado" << endl;
