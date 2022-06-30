@@ -14,14 +14,16 @@ private:
 
     int cantidad;
     Nodo<Tipo>* primero;
-    Nodo<Tipo>* actual;
+    bool eliminar_dato;
 
 public:
+    Nodo<Tipo>* actual;
 
     // PRE: -
     // POST: Crea una lista vacia.
     Lista();
 
+    void no_eliminar();
     // PRE: -
     // POST: Mueve el actual al inicio de la lista.
     void inicializar();
@@ -84,6 +86,12 @@ Lista<Tipo>::Lista() {
     cantidad = 0;
     primero = NULL;
     actual = NULL;
+    eliminar_dato = true;
+}
+
+template <typename Tipo>
+void Lista<Tipo>::no_eliminar(){
+    eliminar_dato = false;
 }
 
 
@@ -220,7 +228,12 @@ void Lista<Tipo>::baja(int pos) {
     }
     cantidad--;
 
-    delete borrar; 
+
+    if(!eliminar_dato){
+        borrar->asignar_dato(NULL);
+    }
+    delete borrar;
+
 }
 
 

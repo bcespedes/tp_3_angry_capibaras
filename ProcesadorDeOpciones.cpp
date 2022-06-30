@@ -642,6 +642,13 @@ void ProcesadorDeOpciones::conectar_grafo(Grafo *grafo){
     }
 }
 
+/*Lectura *copiar_lectura(Lectura *lectura){
+    char tipo = lectura->tipo_lectura();
+    Lectura *devolver = NULL;
+    if(tipo == 'C')
+        devolver = new Cuento(lectura->obtener_titulo(), lectura->obtener_minutos(), lectura->obtener_anio(), lectura->obtener_escritor(), lectura->fue_leido(), lectura->obtener_libro());
+}*/
+
 Grafo* ProcesadorDeOpciones::crear_grafo(){
     Grafo *grafo = new Grafo();
     lista_lecturas_->inicializar();
@@ -660,7 +667,7 @@ void ProcesadorDeOpciones::menor_tiempo_lectura(){
         Grafo *arbol_expansion_min = grafo->Kruskal();
         arbol_expansion_min->mostrar_grafo();
         delete grafo;
-        //delete arbol_expansion_min;
+        delete arbol_expansion_min;
     }
 }
 

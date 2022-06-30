@@ -34,7 +34,7 @@ void Grafo::liberar_matriz_adyacencia(){
     for(int i = 0; i < vertices->obtener_cantidad(); i++){
         delete [] matriz_adyacencia[i];
     }
-    delete matriz_adyacencia;
+    delete [] matriz_adyacencia;
 }
 
 
@@ -55,7 +55,6 @@ void Grafo::agrandar_matriz_adyacencia(){
 
 
 void Grafo::agregar_vertice(Lectura *d){
-    
     agrandar_matriz_adyacencia();
     vertices->alta(d, vertices->obtener_cantidad());
 }
@@ -64,7 +63,6 @@ void Grafo::agregar_vertice(Lectura *d){
 void Grafo::agregar_camino(Lectura* origen, Lectura* destino, int peso){
     int pos_origen = vertices->obtener_posicion(origen);
     int pos_destino = vertices->obtener_posicion(destino);
-
     if(pos_origen == NO_ENCONTRADO){
         cout << "El vertice de origen no fue encontrado" << endl;
         return;
@@ -93,9 +91,8 @@ priority_queue< Arista, vector<Arista>, struct operador > *Grafo::guardar_arista
     for(int i = 0; i < vertices->obtener_cantidad(); i++){
         for(int j = i; j < vertices->obtener_cantidad(); j++){
             if(i != j){
-                Arista *arista = new Arista(vertices->consulta(j) , vertices->consulta(i), matriz_adyacencia[i][j]);
-
-                cola_prioridad->push(*arista);
+                Arista arista(vertices->consulta(j) , vertices->consulta(i), matriz_adyacencia[i][j]);
+                cola_prioridad->push(arista);
             }
         }
     }
@@ -124,7 +121,6 @@ void Grafo::mostrar_grafo(){
     cout << "Tiempo total estimado: " << duracion_total << endl;
 
 }
-
 
 
 Grafo* Grafo::Kruskal(){
@@ -164,5 +160,6 @@ Grafo* Grafo::Kruskal(){
 
 Grafo::~Grafo(){
     liberar_matriz_adyacencia();
+    vertices->no_eliminar();
     delete vertices;
 }

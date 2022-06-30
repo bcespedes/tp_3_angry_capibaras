@@ -42,6 +42,7 @@ private:
     Grafo* crear_grafo();
     void conectar_grafo(Grafo *grafo);
     int validar_peso_arista(Lectura *vertice1, Lectura *vertice2);
+    Lectura *copiar_lectura(Lectura *lectura);
 
 public:
 
