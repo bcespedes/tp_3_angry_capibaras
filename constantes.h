@@ -8,21 +8,6 @@
 // CONSTANTES GENERALES
 const int OPCION_MINIMA = 1;
 
-const std::string VOLVER_A_INTENTAR = "\nIntentalo nuevamente. ";
-
-
-// CONSTANTES DE LA CLASE NOVELA
-enum generos {
-    DRAMA = 1,
-    COMEDIA,
-    FICCION,
-    SUSPENSO,
-    TERROR,
-    ROMANTICA,
-    HISTORICA
-};
-
-
 // CONSTANTES DEL MENU PRINCIPAL.
 const int OPCION_MAXIMA_MENU = 14;
 
@@ -63,21 +48,35 @@ enum cant_opciones_menu {
      COCINAR_PASTEL_DE_PAPA
 };
 
-// CONSTANTES DE LA CLASE UTILIDADES
-const std::string ERROR_TIPO_DE_DATO = "\nNo has ingresado el tipo de dato esperado.";
-
 // CONSTANTES DE LA CLASE PROCESAMIENTO DE OPCIONES
 const int OPCION_ALTERNATIVA = -1;
 const int ISNI_MINIMO = 1000;
 const int ISNI_MAXIMO = 9999;
 
-const std::string LISTA_ESCRITORES_VACIA = "No hay escritores cargados. Puedes agregarlos manualmente.\n";
+const std::string TABLA_ESCRITORES_VACIA = "No hay escritores cargados. Puedes agregarlos manualmente.\n";
 const std::string LISTA_LECTURAS_VACIA = "No hay lecturas cargadas. Puedes agregarlas manualmente.\n";
 const std::string ERROR_INGRESO_INCORRECTO = "\nHas ingresado algo erroneo.";
 const std::string SI_O_NO = " (S / N): ";
+const std::string ERROR_ISNI_INVALIDO = "\nNo se ha encontrado ningun escritor con ese ISNI.";
+const std::string ERROR_ISNI_USADO = "\nYa hay un escritor cargado con ese ISNI.";
 
 const char SI = 'S';
 const char NO = 'N';
+
+// CONSTANTES DE LA CLASE UTILIDADES
+const std::string ERROR_TIPO_DE_DATO = "\nNo has ingresado el tipo de dato esperado.";
+const std::string VOLVER_A_INTENTAR = "\nIntentalo nuevamente. ";
+
+// CONSTANTES DE LA CLASE LISTA
+const int NO_ENCONTRADO = -1;
+
+// CONSTANTES DE LA CLASE GRAFO
+const int INFINITO = 99999999;
+
+// CONSTANTES DE LA CLASE HASH
+const int CANTIDAD_CLAVES = 20;
+
+const double FACTOR_CARGA = 0.8;
 
 // CONSTANTES DE LAS CLASES DE LECTURA DE ARCHIVOS
 const int EOF_NACIMIENTO_FALTANTE = 5;
@@ -95,27 +94,24 @@ const char CUENTO = 'C';
 const char POEMA = 'P';
 const char NOV_HISTORICA = 'H';
 
+// CONSTANTES DE LA CLASE ESCRITOR
+const int ANIO_DESCONOCIDO = -1;
+
 // CONSTANTES DE LA CLASE LECTURA
 const int ES_MAYOR = 1;
 const int ES_MENOR = -1;
 const int ES_IGUAL = 0;
 
-// CONSTANTES DE LA CLASE ESCRITOR
-const int ANIO_DESCONOCIDO = -1;
-
-// CONSTANTES DE LA CLASE HASH
-const int CANTIDAD_CLAVES = 20;
-
-const double FACTOR_CARGA = 0.8;
-
-const std::string ERROR_ISNI_INVALIDO = "\nNo se ha encontrado ningun escritor con ese ISNI.";
-const std::string ERROR_ISNI_USADO = "\nYa hay un escritor cargado con ese ISNI.";
-
-// CONSTANTES DE LA CLASE GRAFO
-const int INFINITO = 99999999;
-
-// CONSTANTES DE LA CLASE LISTA
-const int NO_ENCONTRADO = -1;
+// CONSTANTES DE LA CLASE NOVELA
+enum generos {
+    DRAMA = 1,
+    COMEDIA,
+    FICCION,
+    SUSPENSO,
+    TERROR,
+    ROMANTICA,
+    HISTORICA
+};
 
 
 # endif

@@ -307,7 +307,7 @@ void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
             cout << "\nEste escritor ya tiene anio de fallecimiento asignado" << endl;
     }
     else
-        cout << LISTA_ESCRITORES_VACIA;
+        cout << TABLA_ESCRITORES_VACIA;
 }
 
 
@@ -316,7 +316,7 @@ void ProcesadorDeOpciones::listar_escritores() {
     if(!tabla_escritores_ -> vacia())
         tabla_escritores_ -> imprimir_escritores(false);
     else
-        cout << LISTA_ESCRITORES_VACIA;
+        cout << TABLA_ESCRITORES_VACIA;
 }
 
 

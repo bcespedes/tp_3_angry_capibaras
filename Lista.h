@@ -181,11 +181,12 @@ Tipo Lista<Tipo>::consulta(int pos) {
 
 template <typename Tipo>
 
-int Lista<Tipo>::obtener_posicion(Tipo d){
+int Lista<Tipo>::obtener_posicion(Tipo d) {
+
     if(cantidad == 0)
         return NO_ENCONTRADO;
 
-    int pos = -1;
+    int pos = NO_ENCONTRADO;
     inicializar();
     bool esta = false;
     while(hay_siguiente() && !esta){
