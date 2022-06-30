@@ -23,11 +23,7 @@ private:
     void copiar_matriz(int** matriz_aux);
     void inicializar_vertice(int** matriz);
     void liberar_matriz_adyacencia();
-    void mostrar_vertices();
     void mostrar_matriz_adyacencia();
-    void copiar_vertices(Grafo* nuevo_grafo);
-    void copiar_pesos_padres(int* pesos, int* padres);
-    int buscar_peso_minimo(int* pesos);
     priority_queue< Arista, vector<Arista>, struct operador >* guardar_aristas();
 
 public:
