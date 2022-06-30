@@ -6,6 +6,7 @@ Lector::Lector() {
 
 }
 
+
 int Lector::obtener_isni(string isni) {
 
     string num = "";

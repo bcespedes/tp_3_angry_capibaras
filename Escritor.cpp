@@ -23,10 +23,12 @@ string Escritor::obtener_nombre_completo() {
     return (nombre_ + " ") + apellido_;
 }
 
+
 string Escritor::obtener_nacionalidad() {
 
     return nacionalidad_;
 }
+
 
 bool Escritor::verificar_fallecimiento() {
 
@@ -38,6 +40,7 @@ void Escritor::asignar_fallecimiento(int anio) {
 
     anio_fallecimiento_ = anio;
 }
+
 
 void Escritor::mostrar_escritor() {
 
@@ -58,6 +61,7 @@ void Escritor::mostrar_escritor() {
         cout << "Desconocido" << " - " << "actualidad o desconocido" << endl;
     cout << endl;
 }
+
 
 Escritor::Escritor() {
 

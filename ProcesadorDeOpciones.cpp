@@ -486,8 +486,8 @@ int ProcesadorDeOpciones::obtener_cantidad_lecturas_sin_leer() {
 
     int no_leidos = 0;
 
-    for(int i = 0; i < lista_lecturas_->obtener_cantidad(); i++){
-        if(!lista_lecturas_->consulta(i)->fue_leido())
+    for(int i = 0; i < lista_lecturas_ -> obtener_cantidad(); i++) {
+        if(!lista_lecturas_ -> consulta(i) -> fue_leido())
             no_leidos++;
     }
 
@@ -575,66 +575,69 @@ void ProcesadorDeOpciones::crear_cola_ordenada() {
         cout << LISTA_LECTURAS_VACIA;
 }
 
-int ProcesadorDeOpciones::validar_peso_arista(Lectura *vertice1, Lectura *vertice2){
+int ProcesadorDeOpciones::validar_peso_arista(Lectura* vertice1, Lectura* vertice2) {
+
     int peso = 0;
-    if(vertice1->tipo_lectura() == CUENTO){
-        if(vertice2->tipo_lectura() == CUENTO)
+    if(vertice1 -> tipo_lectura() == CUENTO) {
+        if(vertice2 -> tipo_lectura() == CUENTO)
             peso = 8;
-        if(vertice2->tipo_lectura() == NOVELA)
+        if(vertice2 -> tipo_lectura() == NOVELA)
             peso = 10;
-        if(vertice2->tipo_lectura() == NOV_HISTORICA)
+        if(vertice2 -> tipo_lectura() == NOV_HISTORICA)
             peso = 15;
-        if(vertice2->tipo_lectura() == POEMA)
+        if(vertice2 -> tipo_lectura() == POEMA)
             peso = 0;
     }
-    if(vertice1->tipo_lectura() == POEMA){
-        if(vertice2->tipo_lectura() == CUENTO)
+    if(vertice1->tipo_lectura() == POEMA) {
+        if(vertice2 -> tipo_lectura() == CUENTO)
             peso = 0;
-        if(vertice2->tipo_lectura() == NOVELA)
+        if(vertice2 -> tipo_lectura() == NOVELA)
             peso = 5;
-        if(vertice2->tipo_lectura() == NOV_HISTORICA)
+        if(vertice2 -> tipo_lectura() == NOV_HISTORICA)
             peso = 20;
-        if(vertice2->tipo_lectura() == POEMA)
+        if(vertice2 -> tipo_lectura() == POEMA)
             peso = 1;
     }
-    if(vertice1->tipo_lectura() == NOVELA){
-        if(vertice2->tipo_lectura() == CUENTO)
+    if(vertice1 -> tipo_lectura() == NOVELA) {
+        if(vertice2 -> tipo_lectura() == CUENTO)
             peso = 10;
-        if(vertice2->tipo_lectura() == NOVELA)
+        if(vertice2 -> tipo_lectura() == NOVELA)
             peso = 30;
-        if(vertice2->tipo_lectura() == NOV_HISTORICA)
+        if(vertice2 -> tipo_lectura() == NOV_HISTORICA)
             peso = 60;
-        if(vertice2->tipo_lectura() == POEMA)
+        if(vertice2 -> tipo_lectura() == POEMA)
             peso = 5;
     }
-    if(vertice1->tipo_lectura() == NOV_HISTORICA){
-        if(vertice2->tipo_lectura() == CUENTO)
+    if(vertice1 -> tipo_lectura() == NOV_HISTORICA) {
+        if(vertice2 -> tipo_lectura() == CUENTO)
             peso = 15;
-        if(vertice2->tipo_lectura() == NOVELA)
+        if(vertice2 -> tipo_lectura() == NOVELA)
             peso = 60;
-        if(vertice2->tipo_lectura() == NOV_HISTORICA)
+        if(vertice2 -> tipo_lectura() == NOV_HISTORICA)
             peso = 80;
-        if(vertice2->tipo_lectura() == POEMA)
+        if(vertice2 -> tipo_lectura() == POEMA)
             peso = 20;
     }
+
     return peso;
 }
 
 
-void ProcesadorDeOpciones::conectar_grafo(Grafo *grafo){
-    Lectura *vertice1 = NULL;
-    Lectura *vertice2 = NULL;
+void ProcesadorDeOpciones::conectar_grafo(Grafo* grafo) {
+
+    Lectura* vertice1 = NULL;
+    Lectura* vertice2 = NULL;
     int peso = 0;
-    for(int pos_vertice = 0; pos_vertice < grafo->obtener_tamanio(); pos_vertice++){
+    for(int pos_vertice = 0; pos_vertice < grafo -> obtener_tamanio(); pos_vertice++) {
 
-        vertice1 = lista_lecturas_->consulta(pos_vertice);
+        vertice1 = lista_lecturas_ -> consulta(pos_vertice);
 
-        for(int i = 0; i < grafo->obtener_tamanio(); i++){
+        for(int i = 0; i < grafo->obtener_tamanio(); i++) {
 
-            if(pos_vertice != i){
-                vertice2 = lista_lecturas_->consulta(i);
+            if(pos_vertice != i) {
+                vertice2 = lista_lecturas_ -> consulta(i);
                 peso = validar_peso_arista(vertice1, vertice2);
-                grafo->agregar_camino(vertice1, vertice2, peso);
+                grafo -> agregar_camino(vertice1, vertice2, peso);
             }
 
         }
@@ -642,23 +645,26 @@ void ProcesadorDeOpciones::conectar_grafo(Grafo *grafo){
     }
 }
 
-Grafo* ProcesadorDeOpciones::crear_grafo(){
-    Grafo *grafo = new Grafo();
-    lista_lecturas_->inicializar();
-    while(lista_lecturas_->hay_siguiente()){
-        grafo->agregar_vertice(lista_lecturas_->siguiente());
+Grafo* ProcesadorDeOpciones::crear_grafo() {
+
+    Grafo* grafo = new Grafo();
+    lista_lecturas_ -> inicializar();
+    while(lista_lecturas_ -> hay_siguiente()) {
+        grafo->agregar_vertice(lista_lecturas_ -> siguiente());
     }
     conectar_grafo(grafo);
+
     return grafo;
 }
 
 
-void ProcesadorDeOpciones::menor_tiempo_lectura(){
-    if(!lista_lecturas_->vacia()){
-        Grafo *grafo = crear_grafo();
+void ProcesadorDeOpciones::menor_tiempo_lectura() {
+
+    if(!lista_lecturas_ -> vacia()) {
+        Grafo* grafo = crear_grafo();
         cout << "Para leer todas las lecturas en el menor tiempo, debemos seguir lo siguiente: " << endl << endl;
-        Grafo *arbol_expansion_min = grafo->Kruskal();
-        arbol_expansion_min->mostrar_grafo();
+        Grafo* arbol_expansion_min = grafo -> Kruskal();
+        arbol_expansion_min -> mostrar_grafo();
         delete grafo;
         delete arbol_expansion_min;
     }

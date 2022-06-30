@@ -20,18 +20,12 @@ int Hash::aplicar_division(int clave) {
 }
 
 
-Lista<Escritor*>* Hash::obtener_lista(int posicion) {
-
-    return tabla_hash_[posicion];
-}
-
-
 int Hash::obtener_posicion_elemento(int clave) {
 
     int posicion = -1, indice = aplicar_division(clave);
     bool esta = false;
 
-    Lista<Escritor*>* lista_escritores = obtener_lista(indice);
+    Lista<Escritor*>* lista_escritores = tabla_hash_[indice];
     lista_escritores -> inicializar();
     while(lista_escritores -> hay_siguiente() && !esta) {
         posicion++;

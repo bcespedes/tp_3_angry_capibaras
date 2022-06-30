@@ -21,6 +21,7 @@ Menu::Menu() {
      delete procesador_opciones;
 }
 
+
 void Menu::mantener_abierto_menu(Utilidades validador, Utilidades limpiador, ProcesadorDeOpciones *procesador_opciones){
      while (!cerrar_menu) {
           mostrar_menu();

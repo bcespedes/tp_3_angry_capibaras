@@ -17,7 +17,6 @@ private:
 
     // METODOS
     int aplicar_division(int clave);
-    Lista<Escritor*>* obtener_lista(int posicion);
     int obtener_posicion_elemento(int clave);
 
 public:
@@ -55,5 +54,6 @@ public:
     ~Hash();
 
 };
+
 
 # endif

@@ -111,5 +111,11 @@ const double FACTOR_CARGA = 0.8;
 const std::string ERROR_ISNI_INVALIDO = "\nNo se ha encontrado ningun escritor con ese ISNI.";
 const std::string ERROR_ISNI_USADO = "\nYa hay un escritor cargado con ese ISNI.";
 
+// CONSTANTES DE LA CLASE GRAFO
+const int INFINITO = 99999999;
+
+// CONSTANTES DE LA CLASE LISTA
+const int NO_ENCONTRADO = -1;
+
 
 # endif

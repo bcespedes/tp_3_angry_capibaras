@@ -45,7 +45,8 @@ void Novela::mostrar_lectura() {
         cout << "ANONIMO" << endl << endl;
 }
 
-char Novela::tipo_lectura(){
+
+char Novela::tipo_lectura() {
     return 'N';
 }
 
