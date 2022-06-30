@@ -50,7 +50,7 @@ public:
 
     // PRE: -
     // POST: Muestra por pantalla los vertices y aristas con su peso.
-    void mostrar_grafo();
+    void mostrar_grafo(bool mostrar_solo_matriz);
 
     // PRE: -
     // POST: Crea el arbol de expansion minima y lo devuelve.

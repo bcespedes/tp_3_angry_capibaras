@@ -570,6 +570,7 @@ void ProcesadorDeOpciones::crear_cola_ordenada() {
         cout << LISTA_LECTURAS_VACIA;
 }
 
+
 int ProcesadorDeOpciones::validar_peso_arista(Lectura* vertice1, Lectura* vertice2) {
 
     int peso = 0;
@@ -636,7 +637,6 @@ void ProcesadorDeOpciones::conectar_grafo(Grafo* grafo) {
             }
 
         }
-        pos_vertice++;
     }
 }
 
@@ -658,12 +658,13 @@ void ProcesadorDeOpciones::menor_tiempo_lectura() {
 
     if(!lista_lecturas_ -> vacia()) {
         Grafo* grafo = crear_grafo();
+        grafo -> mostrar_grafo(true);
         cout << "Para leer todas las lecturas en el menor tiempo, debemos seguir lo siguiente: " << endl << endl;
         Grafo* arbol_expansion_min = grafo -> crear_arbol_expansion_minima();
         if(arbol_expansion_min)
-            arbol_expansion_min -> mostrar_grafo();
+            arbol_expansion_min -> mostrar_grafo(false);
         else
-            grafo -> mostrar_grafo();
+            grafo -> mostrar_grafo(false);
         delete grafo;
         delete arbol_expansion_min;
     }
