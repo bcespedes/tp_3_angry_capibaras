@@ -10,6 +10,11 @@
 
 class Utilidades {
 
+private:
+
+    // METODOS
+    void mostrar_tipo_error();
+
 public:
 
     // PRE:
@@ -19,8 +24,6 @@ public:
     // PRE: -
     // POST: Limpia la pantalla.
     void limpiar_pantalla();
-
-    void mostrar_tipo_error();
 
     // PRE: a_validar debe ser entero.
     // POST: Devuelve el entero validando que sea del tipo de dato y valor correcto.

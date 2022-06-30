@@ -21,7 +21,7 @@ void Grafo::inicializar_vertice(int** matriz) {
         matriz[i][vertices -> obtener_cantidad()] = INFINITO;
     }
 
-    matriz[vertices -> obtener_cantidad()][vertices -> obtener_cantidad()] = 0;
+    matriz[vertices -> obtener_cantidad()][vertices -> obtener_cantidad()] = INFINITO;
 }
 
 
@@ -58,6 +58,24 @@ void Grafo::agrandar_matriz_adyacencia() {
     inicializar_vertice(matriz_aux);
     liberar_matriz_adyacencia();
     matriz_adyacencia = matriz_aux;
+}
+
+
+void Grafo::mostrar_matriz_adyacencia() {
+
+    cout << "Matriz de adyacencia del grafo:" << endl << endl;
+    for(int i = 0; i < vertices -> obtener_cantidad(); i++) {
+        for(int j = 0; j < vertices -> obtener_cantidad(); j++) {
+            if(matriz_adyacencia[i][j] == INFINITO)
+                cout << "| -- |";
+            else if(matriz_adyacencia[i][j] >= 10)
+                cout << "| " << matriz_adyacencia[i][j] << " |";
+            else
+                cout << "|  " << matriz_adyacencia[i][j] << " |";
+        }
+        cout << endl;
+    }
+    cout << endl;
 }
 
 
@@ -115,12 +133,12 @@ priority_queue< Arista, vector<Arista>, struct operador >* Grafo::guardar_arista
 }
 
 
-void Grafo::mostrar_grafo() {
+void Grafo::mostrar_grafo(bool mostrar_solo_matriz) {
 
     int tiempo_lectura = 0, tiempo_siesta = 0;
     Lectura* vertice1;
     Lectura* vertice2;
-    if(vertices -> obtener_cantidad() > 1) {
+    if(vertices -> obtener_cantidad() > 1 && !mostrar_solo_matriz) {
         for(int i = 0; i < vertices -> obtener_cantidad(); i++) {
             vertice1 = vertices -> consulta(i);
 
@@ -138,13 +156,14 @@ void Grafo::mostrar_grafo() {
         }
         cout << "Se ha dormido siesta durante " << tiempo_siesta << " minutos." << endl;
         cout << "Se ha leido aproximadamente durante " << tiempo_lectura << " minutos." << endl;
-        cout << "Tiempo total estimado: " << tiempo_siesta + tiempo_lectura << " minutos." << endl;
+        cout << "Tiempo total estimado: " << tiempo_siesta + tiempo_lectura << " minutos." << endl << endl;
     }
-    else {
+    else if(!mostrar_solo_matriz) {
         vertice1 = vertices -> consulta(0);
         cout << "Solo hay una lectura cargada por lo que se leera -----> " << vertice1 -> obtener_titulo() <<
         " (Duracion de: " << vertice1 -> obtener_minutos() << " minutos)" << endl;
     }
+    mostrar_matriz_adyacencia();
 
 }
 
