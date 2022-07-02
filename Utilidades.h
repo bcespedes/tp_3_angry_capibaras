@@ -10,6 +10,11 @@
 
 class Utilidades {
 
+private:
+
+    // METODOS
+    void mostrar_tipo_error();
+
 public:
 
     // PRE:
@@ -20,13 +25,9 @@ public:
     // POST: Limpia la pantalla.
     void limpiar_pantalla();
 
-    // PRE: Ambas opciones deben ser enteros.
-    // POST: Devuelve verdadero si la opcion esta dentro del rango minimo (1) y el maximo.
-    bool validar_opcion(int opcion, int opcion_max);
-
-    // PRE:  a_validar debe ser entero.
+    // PRE: a_validar debe ser entero.
     // POST: Devuelve el entero validando que sea del tipo de dato y valor correcto.
-    int validar_ingreso_entero(int a_validar, string instruccion, int valor_minimo);
+    int validar_ingreso_entero(int a_validar, string instruccion, int valor_minimo, int valor_maximo);
 
     // PRE: Las lecturas deben ser validas y debe existir su lista.
     // POST: Inserta las lecturas ordenadas por anio a la lista.

@@ -1,5 +1,5 @@
-#ifndef LECTURA_H
-#define LECTURA_H
+# ifndef LECTURA_H
+# define LECTURA_H
 
 
 # include <iostream>

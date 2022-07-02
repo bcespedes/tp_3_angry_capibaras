@@ -6,7 +6,7 @@
 # include "Utilidades.h"
 # include "LectorLecturas.h"
 # include "Cola.h"
-# include "grafo.h"
+# include "Grafo.h"
 # include "stdlib.h"
 # include "time.h"
 # include <string.h>
@@ -42,6 +42,7 @@ private:
     Grafo* crear_grafo();
     void conectar_grafo(Grafo *grafo);
     int validar_peso_arista(Lectura *vertice1, Lectura *vertice2);
+    Lectura *copiar_lectura(Lectura *lectura);
 
 public:
 

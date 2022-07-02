@@ -1,6 +1,7 @@
 # ifndef NOVELA_H
 # define NOVELA_H
 
+
 # include "constantes.h"
 # include "Lectura.h"
 

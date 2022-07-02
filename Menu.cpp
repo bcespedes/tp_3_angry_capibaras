@@ -21,10 +21,11 @@ Menu::Menu() {
      delete procesador_opciones;
 }
 
+
 void Menu::mantener_abierto_menu(Utilidades validador, Utilidades limpiador, ProcesadorDeOpciones *procesador_opciones){
      while (!cerrar_menu) {
           mostrar_menu();
-          opcion_elegida = validador.validar_ingreso_entero(opcion_elegida, ESCRIBA_OPCION_MENU, OPCION_MINIMA);
+          opcion_elegida = validador.validar_ingreso_entero(opcion_elegida, ESCRIBA_OPCION_MENU, OPCION_MINIMA, OPCION_MAXIMA_MENU);
           limpiador.limpiar_pantalla();
           cerrar_menu = procesar_opcion(procesador_opciones);
      }
@@ -106,12 +107,9 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
           case COCINAR_PASTEL_DE_PAPA:
                procesador_opciones -> cocinar_pastel_de_papa();
                break;
-          default:
-               cout << OPCION_INVALIDA_MENU << endl;
-               cout << endl; 
      }         
 
-     if(opcion_elegida != SALIR && validador.validar_opcion(opcion_elegida, OPCION_MAXIMA_MENU))
+     if(opcion_elegida != SALIR)
           tecla_continuar();
           
 
