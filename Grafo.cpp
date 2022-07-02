@@ -160,8 +160,8 @@ void Grafo::mostrar_grafo(bool mostrar_solo_matriz) {
     }
     else if(!mostrar_solo_matriz) {
         vertice1 = vertices -> consulta(0);
-        cout << "Solo hay una lectura cargada por lo que se leera -----> " << vertice1 -> obtener_titulo() <<
-        " (Duracion de: " << vertice1 -> obtener_minutos() << " minutos)" << endl;
+        cout << endl << "Solo hay una lectura cargada por lo que se leera -----> " << vertice1 -> obtener_titulo() <<
+        " (Duracion de: " << vertice1 -> obtener_minutos() << " minutos)\n" << endl << endl;
     }
     mostrar_matriz_adyacencia();
 

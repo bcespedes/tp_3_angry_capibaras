@@ -272,6 +272,43 @@ int ProcesadorDeOpciones::agregar_escritor() {
 }
 
 
+void ProcesadorDeOpciones::eliminar_lecturas_asociadas(Escritor* escritor) {
+
+    int posicion = 0;
+    lista_lecturas_ -> inicializar();
+    while(lista_lecturas_ -> hay_siguiente()) {
+        if(lista_lecturas_ -> siguiente() -> obtener_escritor() == escritor) {
+            lista_lecturas_ -> baja(posicion);
+            posicion--;
+        }
+        posicion++;
+    }
+}
+
+
+void ProcesadorDeOpciones::quitar_escritor() {
+
+    if(!tabla_escritores_ -> vacia()) {
+        Utilidades validador;
+        int isni = 0;
+        tabla_escritores_ -> imprimir_escritores(true);
+
+        while(!tabla_escritores_ -> esta_el_elemento(isni)) {
+            isni = validador.validar_ingreso_entero(isni, "Ingrese el ISNI del escritor a eliminar: ", ISNI_MINIMO, ISNI_MAXIMO);
+            if(!tabla_escritores_ -> esta_el_elemento(isni))
+                cout << ERROR_ISNI_INVALIDO + VOLVER_A_INTENTAR;
+        }
+
+        Escritor* escritor = tabla_escritores_ -> consulta(isni);
+        eliminar_lecturas_asociadas(escritor);
+        cout << "\n\nSe han eliminado tambien (si las hubiese) todas las lecturas asociadas a " << escritor -> obtener_nombre_completo() << ".\n" << endl;
+        tabla_escritores_ -> baja(isni);
+    }
+    else
+        cout << TABLA_ESCRITORES_VACIA;
+}
+
+
 void ProcesadorDeOpciones::asignar_fallecimiento_escritor() {
 
     if(!tabla_escritores_-> vacia()) {

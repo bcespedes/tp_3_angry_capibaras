@@ -9,7 +9,6 @@ Menu::Menu() {
 
      Utilidades limpiador, validador;
      limpiador.limpiar_pantalla();
-     mensaje_bienvenida();
      opcion_elegida = 0;
      cerrar_menu = false;
      LectorEscritores lector_escritores;
@@ -24,6 +23,7 @@ Menu::Menu() {
 
 void Menu::mantener_abierto_menu(Utilidades validador, Utilidades limpiador, ProcesadorDeOpciones *procesador_opciones){
      while (!cerrar_menu) {
+          mensaje_bienvenida();
           mostrar_menu();
           opcion_elegida = validador.validar_ingreso_entero(opcion_elegida, ESCRIBA_OPCION_MENU, OPCION_MINIMA, OPCION_MAXIMA_MENU);
           limpiador.limpiar_pantalla();
@@ -57,6 +57,7 @@ void Menu::mostrar_menu() {
      cout << OPCION_11 << endl;
      cout << OPCION_12 << endl;
      cout << OPCION_13 << endl;
+     cout << OPCION_14 << endl;
 }
 
 
@@ -72,6 +73,9 @@ bool Menu::procesar_opcion(ProcesadorDeOpciones* procesador_opciones) {
                break;
           case AGREGAR_ESCRITOR:
                procesador_opciones -> agregar_escritor();
+               break;
+          case QUITAR_ESCRITOR:
+               procesador_opciones -> quitar_escritor();
                break;
           case CAMBIAR_FALLECIMIENTO:
                procesador_opciones -> asignar_fallecimiento_escritor();
