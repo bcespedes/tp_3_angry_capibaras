@@ -3,7 +3,7 @@
 
 Hash::Hash() {
 
-    tamanio_tabla_ = CANTIDAD_CLAVES / FACTOR_CARGA;
+    tamanio_tabla_ = round(CANTIDAD_CLAVES / FACTOR_CARGA);
 
     tabla_hash_ = new Lista<Escritor*>*[tamanio_tabla_];
 

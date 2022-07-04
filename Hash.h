@@ -2,6 +2,7 @@
 # define HASH_H
 
 
+# include <cmath>
 # include "constantes.h"
 # include "Lista.h"
 # include "Escritor.h"
