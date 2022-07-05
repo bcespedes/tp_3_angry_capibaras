@@ -38,6 +38,20 @@ El programa debe compilar por terminal con el comando: g++ *.cpp -Wall -Werror -
 Establecimos un grupo de trabajo consolidado, por lo que no hubo una division de tareas muy marcada. A traves de reuniones planteamos las diferentes problematicas y las resolvimos juntos. En algunos momentos, para agilizar y aprovechar tiempos, utilizamos la extension del Vscode "Live Share" con lo que podiamos acceder todos al mismo codigo en tiempo real e ir modificandolo. Esta tematica se aprovecho mucho conjunto a la modalidad pair programming. Sobre el final hubo mas independencia y trabajo individual, con tareas puntuales, puliendo y optimizando el codigo con la finalidad de entregar un producto lo mas completo posible. 
 Para estar tercer parte, trabajamos de manera mas independiente, mientras dos se encargaban del grafo y el algoritmo de Kruskal, otro implemento el hash con sus modificaciones al codigo correspondientes.
 
-### Complejidad del Hash:
-La consulta es O(n) pues se debe recorrer la lista, e ir buscando el ISNI. En el peor caso se debe recorrer toda la lista, en el mejor caso, el elemento a consultar esta al principio. Lo mismo ocurre con la baja, siendo tambien O(n).
-Para el alta en cambio, es siempre O(1) pues se da de alta en la posicion 0 de la lista.
+### Complejidad de la tabla de Hash:
+La clave siempre sera calculada en O(1) y se accedera a la locacion en O(1) tambien, pues las listas de la tabla se encuentran en un vector. 
+
+- MEJOR CASO: 
+    Alta: La clave indica una ubicacion libre y por lo tanto se inserta en el primer elemento de la lista, por lo que es O(1).
+    Baja: La clave indica una ubicacion y el elemento a ser dado de baja se encuentra en la primera posicion de la lista, por lo que es O(1)
+
+- CASO PROMEDIO: (para una tabla con una funcion de hashing bien definida)
+    Alta: El alta es O(1) pues siempre se inserta al principio de la lista enlazada.
+    Baja: En un caso promedio, todas las listas tienen aproximadamente el mismo largo (cantidad total de elementos/ tamaño de la tabla, o n/m), por lo que en promedio para dar la baja habra que recorrer una cantidad constante de elementos, por lo cual es O(1)).
+
+- PEOR CASO:
+    En el peor de los casos todos los elementos colisionan en la misma lista enlazada.
+    Alta: El alta es O(1) pues siempre se inserta al principio de la lista enlazada.
+    Baja: En el peor caso hay que eliminar el ultimo nodo de esta lista, por lo que hay que iterarla por completo, por lo que es O(n) tambien.
+
+En general la consulta tiene la misma complejidad que la baja, ya que lo busca de la misma forma, pero sin sacarlo de la tabla (La baja de un elemento de una lista enlazada, SIN contar su busqueda o la iteracion hasta su posicion, es O(1), por lo que sacarlo o no sacarlo no cambia la complejidad)
