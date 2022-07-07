@@ -59,17 +59,19 @@ public:
     // POST: Quita una lectura de la lista.
     void quitar_lectura();
 
-    // PRE: La lista_escritores esta creada.
+    // PRE: La tabla_escritores esta creada.
     // POST: Agrega un escritor a la lista. Devuelve su ISNI.
     int agregar_escritor();
 
+    // PRE: -
+    // POST: Quita el escritor de la tabla y sus lecturas asociadas.
     void quitar_escritor();
 
-    // PRE: La lista_escritores esta creada.
+    // PRE: La tabla_escritores esta creada.
     // POST: Si el escritor no tiene un fallecimiento asignado, se le pide un anio al usuario y se actualiza.
     void asignar_fallecimiento_escritor();
 
-    // PRE: La lista_escritores esta creada.
+    // PRE: La tabla_escritores esta creada.
     // POST: Muestra por pantalla todos los escritores. En caso de no haber, se le informa al usuario
     void listar_escritores();
 
@@ -97,6 +99,8 @@ public:
     // POST: Crea una cola ordenada por duracion en base a las lecturas no leidas.
     void crear_cola_ordenada();
 
+    // PRE: -
+    // POST: Crea y muestra el arbol de expansion minima con su matriz asociada.
     void menor_tiempo_lectura();
 
     // PRE: -
